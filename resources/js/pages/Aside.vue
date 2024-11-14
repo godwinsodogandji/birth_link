@@ -1,5 +1,5 @@
 <template>
-    <aside class="w-64 bg-white p-5 min-h-screen shadow-lg">
+    <aside class="w-64 bg-white   shadow-lg fixed top-25 left-0 z-40  h-screen transition-transform -translate-x-full sm:translate-x-0">
         <button class="bg-red-500 text-white py-2 px-4 rounded mb-6 hover:bg-red-600 transition duration-300">
             Créer Nouveau
         </button>
