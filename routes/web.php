@@ -25,4 +25,4 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('ajoutdesamis');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

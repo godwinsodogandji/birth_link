@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,13 +18,10 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Tenter d'authentifier l'utilisateur avec le username et le mot de passe
+        // Vérifier les identifiants
         if (Auth::attempt($credentials)) {
-            // Authentification réussie, régénérer la session
             $request->session()->regenerate();
-
-
-            return redirect()->intended('dashboard');
+            return Inertia::location(route(name: 'dashboard'));
         }
 
         // Si les identifiants sont incorrects, renvoyer une erreur

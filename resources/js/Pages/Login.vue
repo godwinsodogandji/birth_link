@@ -50,13 +50,14 @@ const form = ref({
 const errors = ref({});
 
 const submit = () => {
+    console.log('Formulaire soumis:', form.value); // Debug information
     Inertia.post('/login', form.value, {
         onError: (error) => {
             errors.value = error;
         },
         onSuccess: () => {
-            console.log('Connexion réussie');
-        },
+    console.log('Connexion réussie, redirection vers le dashboard');
+},
     });
 };
 </script>
