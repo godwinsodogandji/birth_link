@@ -1,4 +1,11 @@
 <template>
+  <div class="bg-red-100">
+
+    <Nav />
+
+    <div class="flex">
+  <Aside></Aside>
+
     <div class="flex flex-col items-center mt-10">
         <form class="max-w-md mx-auto w-full mb-4 p-5">   
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -41,9 +48,17 @@
              </button>
          </div>
      </div>
+
+
+     </div>
+
+
+    </div>
  </template>
  
  <script setup>
+ import Nav from '@/Pages/Nav.vue'
+import Aside from '@/Pages/Aside.vue';
  import { ref, computed } from 'vue';
  
  // Exemple de données utilisateurs
