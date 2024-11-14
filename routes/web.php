@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjoutDesAmisController;
 use App\Http\Controllers\DashbordController;
+use App\Http\Controllers\FriendController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,3 +11,4 @@ Route::get('/', function () {
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
 Route::get('/dashboard', [DashbordController::class, 'index'])->name('ajoutdesamis');
+Route::get('/friends', [FriendController::class, 'index'])->name('friends');
