@@ -63,3 +63,12 @@ git merge main
 git add .
 git commit -m "Résolution des conflits"
 ```
+
+
+
+
+
+
+
+
+

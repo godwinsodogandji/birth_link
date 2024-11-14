@@ -1,5 +1,6 @@
 <template>
   <div class="flex" id="app">
+    <!-- aside -->
     <aside class="w-64 bg-white p-4 shadow-lg">
       <button class="bg-red-500 text-white py-2 px-4 rounded mb-6 hover:bg-red-600 transition duration-300">
         Créer Nouveau
@@ -34,11 +35,11 @@
               </li>
             </ul>
           </li>
-          <!-- Add more sections here if needed -->
         </ul>
       </nav>
     </aside>
 
+    <!-- main -->
     <main class="flex-1 p-6">
       <section class="mb-6">
         <div class="flex items-center justify-center">
@@ -152,3 +153,6 @@ export default {
   }
 }
 </style>
+
+
+
