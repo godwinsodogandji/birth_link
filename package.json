@@ -6,6 +6,7 @@
         "dev": "vite"
     },
     "devDependencies": {
+        "@vitejs/plugin-vue": "^5.2.0",
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
@@ -15,11 +16,11 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "vue": "^3.x.x",
+        "@fortawesome/fontawesome-free": "^6.6.0",
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-vue3": "^0.6.0",
-        "@vitejs/plugin-vue": "^5.2.0",
-        "lottie": "^0.0.1",
-        "vue": "^3.5.12",
-        "vue-router": "^4.4.5"
+        "@inertiajs/progress": "^0.2.7",
+        "@inertiajs/vue3": "^1.2.0"
     }
 }
