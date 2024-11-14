@@ -1,7 +1,5 @@
 <template>
- 
-
-    <aside class="w-64 bg-white p-4 shadow-lg">
+    <aside class="w-64 bg-white p-5 min-h-screen shadow-lg">
         <button class="bg-red-500 text-white py-2 px-4 rounded mb-6 hover:bg-red-600 transition duration-300">
             Créer Nouveau
         </button>
@@ -34,18 +32,25 @@
                     </a>
                     <ul class="ml-6 mt-2">
                         <li class="mb-2">
-                            <a class="text-gray-500 hover:text-red-500 transition duration-300" href="#">
+                            <a class="text-gray-500 hover:text-red-500 transition duration-300" href="/friends">
                                 Liste d'Amis
                             </a>
                         </li>
                         <li class="mb-2">
                             <a class="text-gray-500 hover:text-red-500 transition duration-300" href="/ajoutdesamis">
-                                Invitations
+                               Ajout des amis
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a class="text-gray-500 hover:text-red-500 transition duration-300" href="/suggestion-des-amis">
+                            <a class="text-gray-500 hover:text-red-500 transition duration-300"
+                                href="/suggestion-des-amis">
                                 Suggestion d'amis
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-gray-500 hover:text-red-500 transition duration-300"
+                                href="/confirmation-des-amis">
+                                Invitations
                             </a>
                         </li>
                     </ul>
@@ -90,7 +95,7 @@
                 </li>
             </ul>
         </nav>
-    </aside> 
+    </aside>
 </template>
 
 <script setup>
@@ -99,47 +104,52 @@ const showNotifications = ref(false);
 const showProfileMenu = ref(false);
 
 const notifications = [
-  'Nouvelle invitation d\'anniversaire',
-  'Rappel: Anniversaire de Jean demain',
-  'Nouveau thème ajouté',
+    'Nouvelle invitation d\'anniversaire',
+    'Rappel: Anniversaire de Jean demain',
+    'Nouveau thème ajouté',
 ];
 
 
 const quickAccessItems = [
-  { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
-  { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },
-  { title: 'Vœux', count: 237, iconClass: 'fas fa-envelope text-green-500' },
+    { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
+    { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },
+    { title: 'Vœux', count: 237, iconClass: 'fas fa-envelope text-green-500' },
 ];
 
 const folders = [
-  { title: 'Anniversaires', count: 3, iconClass: 'fas fa-birthday-cake text-red-500' },
-  { title: 'Amis', count: 84, iconClass: 'fas fa-users text-red-500' },
+    { title: 'Anniversaires', count: 3, iconClass: 'fas fa-birthday-cake text-red-500' },
+    { title: 'Amis', count: 84, iconClass: 'fas fa-users text-red-500' },
 ];
 
 const toggleNotifications = () => {
-  showNotifications.value = !showNotifications.value;
+    showNotifications.value = !showNotifications.value;
 };
 
 const toggleProfileMenu = () => {
-  showProfileMenu.value = !showProfileMenu.value;
+    showProfileMenu.value = !showProfileMenu.value;
 };
 </script>
 
 <style scoped>
 body {
-  font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
+
 .animate-bounce-slow {
-  animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
 }
+
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
+
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
 }
 </style>

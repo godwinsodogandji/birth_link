@@ -11,4 +11,10 @@ class AmisSuggererController extends Controller
     {
         return Inertia::render('AmisSuggerer');
     }
+
+    public function confirmation()
+    {
+        return Inertia::render('ConfirmationDesAmis');
+    }
+    
 }
