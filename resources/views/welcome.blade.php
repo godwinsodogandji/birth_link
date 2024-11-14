@@ -28,6 +28,8 @@
  </head>
  <body class="bg-red-100">
   <div class="flex" id="app">
+
+  
    <aside class="w-64 bg-white p-4 shadow-lg">
     <button class="bg-red-500 text-white py-2 px-4 rounded mb-6 hover:bg-red-600 transition duration-300">
      Créer Nouveau
