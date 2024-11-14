@@ -38,13 +38,19 @@
                         </li>
                         <li class="mb-2">
                             <a class="text-gray-500 hover:text-red-500 transition duration-300" href="/ajoutdesamis">
-                                Invitations
+                               Ajout des amis
                             </a>
                         </li>
                         <li class="mb-2">
                             <a class="text-gray-500 hover:text-red-500 transition duration-300"
                                 href="/suggestion-des-amis">
                                 Suggestion d'amis
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-gray-500 hover:text-red-500 transition duration-300"
+                                href="/confirmation-des-amis">
+                                Invitations
                             </a>
                         </li>
                     </ul>

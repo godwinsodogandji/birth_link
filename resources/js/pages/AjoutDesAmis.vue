@@ -3,7 +3,7 @@
         <Nav />
         <div class="flex flex-grow">
             <Aside /> 
-
+            
             <div class="flex flex-col items-center justify-center w-full ">
                 <form @submit.prevent="performSearch" class="max-w-md w-full mb-4 ">
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
