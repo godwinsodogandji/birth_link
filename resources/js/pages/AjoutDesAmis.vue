@@ -1,64 +1,7 @@
 <template>
     <div class="flex h-screen bg-gray-100">
       <!-- Sidebar -->
-      <!-- <div class="bg-white w-64 p-6 flex flex-col">
-        <div class="flex items-center mb-6">
-          <div class="bg-blue-500 p-2 rounded-full">
-            <i class="fas fa-plus text-white"></i>
-          </div>
-          <span class="ml-3 text-lg font-semibold">Request for</span>
-        </div>
-        <nav class="flex-1">
-          <ul>
-            <li class="mb-4">
-              <a class="flex items-center text-gray-600 hover:text-blue-500" href="#">
-                <i class="fas fa-tachometer-alt mr-3"></i>
-                Dashboard
-              </a>
-            </li>
-            <li class="mb-4">
-              <a class="flex items-center text-blue-500" href="#">
-                <i class="fas fa-users mr-3"></i>
-                People
-              </a>
-            </li>
-            <li class="mb-4">
-              <a class="flex items-center text-gray-600 hover:text-blue-500" href="#">
-                <i class="fas fa-dollar-sign mr-3"></i>
-                Finances
-              </a>
-            </li>
-            <li class="mb-4">
-              <a class="flex items-center text-gray-600 hover:text-blue-500" href="#">
-                <i class="fas fa-chart-line mr-3"></i>
-                Statistics
-              </a>
-            </li>
-            <li class="mb-4">
-              <a class="flex items-center text-gray-600 hover:text-blue-500" href="#">
-                <i class="fas fa-file-alt mr-3"></i>
-                Documents
-              </a>
-            </li>
-            <li class="mb-4">
-              <a class="flex items-center text-gray-600 hover:text-blue-500" href="#">
-                <i class="fas fa-calendar-alt mr-3"></i>
-                Calendar
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="mt-auto">
-          <a class="flex items-center text-gray-600 hover:text-blue-500 mb-4" href="#">
-            <i class="fas fa-life-ring mr-3"></i>
-            Support
-          </a>
-          <a class="flex items-center text-gray-600 hover:text-blue-500" href="#">
-            <i class="fas fa-power-off mr-3"></i>
-            Logout
-          </a>
-        </div>
-      </div> -->
+      
   
       <!-- Main Content -->
       <div class="flex-1 p-6">
