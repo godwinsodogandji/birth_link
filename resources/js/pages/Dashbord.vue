@@ -1,7 +1,7 @@
 <template>
     <div class="flex h-screen bg-gray-100">
       <!-- Sidebar -->
-      <!-- <div class="bg-white w-64 p-6 flex flex-col">
+      <div class="bg-white w-64 p-6 flex flex-col">
         <div class="flex items-center mb-6">
           <div class="bg-blue-500 p-2 rounded-full">
             <i class="fas fa-plus text-white"></i>
@@ -58,7 +58,7 @@
             Logout
           </a>
         </div>
-      </div> -->
+      </div>
   
       <!-- Main Content -->
       <div class="flex-1 p-6">
@@ -185,7 +185,7 @@
           </div>
         </div>
       </div>
-
+      
     </div>
   </template>
   
