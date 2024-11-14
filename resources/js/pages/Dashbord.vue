@@ -1,6 +1,6 @@
 <template>
   <div class="bg-red-100">
-    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <her class="bg-white shadow-md p-4 flex justify-between items-center">
       <div class="flex items-center">
         <i class="fas fa-birthday-cake text-red-500 text-3xl mr-2"></i>
         <h1 class="text-2xl font-bold text-red-700">Anniversaire Dashboard</h1>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </nav>
-    </header>
+    </her>
 
     <div class="flex">
       <aside class="w-64 bg-white p-4 shadow-lg">
@@ -71,7 +71,7 @@
         </section>
 
         <section class="mb-6">
-          <h2 class="text-2xl font-semibold mb-4 text-red-700">Accès Rapide</h2>
+          <h2 class="text-2xl font-semibold mb-4 text-red-700">Nouveautés</h2>
           <div class="grid grid-cols-3 gap-4">
             <div v-for="(item, index) in quickAccessItems" :key="index" class="bg-red-100 p-4 rounded flex items-center shadow-md">
               <i :class="item.iconClass" class="text-2xl mr-4"></i>
@@ -84,7 +84,7 @@
         </section>
 
         <section class="mb-6">
-          <h2 class="text-2xl font-semibold mb-4 text-red-700">Dossiers</h2>
+          <h2 class="text-2xl font-semibold mb-4 text-red-700">Récents</h2>
           <div class="grid grid-cols-4 gap-4">
             <div v-for="(folder, index) in folders" :key="index" class="bg-white p-4 rounded flex items-center shadow-md">
               <i :class="folder.iconClass" class="text-2xl mr-4"></i>
