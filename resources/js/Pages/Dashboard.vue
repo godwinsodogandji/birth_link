@@ -59,7 +59,7 @@
           </a>
         </div>
       </div> -->
-  
+
       <!-- Main Content -->
       <div class="flex-1 p-6">
         <div class="flex justify-between items-center mb-6">
@@ -78,7 +78,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="flex justify-between items-center mb-6">
           <div class="flex items-center">
             <button class="bg-blue-500 text-white px-4 py-2 rounded mr-4">All</button>
@@ -99,7 +99,7 @@
             </button>
           </div>
         </div>
-  
+
         <div class="grid grid-cols-3 gap-6">
           <PersonCard
             name="Henry Paulista"
@@ -145,7 +145,7 @@
           />
         </div>
       </div>
-  
+
       <!-- Right Sidebar -->
       <div class="bg-white w-80 p-6">
         <div class="mb-6">
@@ -154,7 +154,7 @@
             <h3 class="text-lg font-semibold">Design Team</h3>
           </div>
         </div>
-  
+
         <div class="mb-6">
           <h2 class="text-lg font-semibold mb-4">Time Log</h2>
           <div class="relative w-32 h-32 mx-auto">
@@ -167,7 +167,7 @@
             </svg>
           </div>
         </div>
-  
+
         <div class="mb-6">
           <h2 class="text-lg font-semibold mb-4">Projects</h2>
           <div class="grid grid-cols-2 gap-4">
@@ -177,7 +177,7 @@
             <ProjectCard title="Waiting" count="16" />
           </div>
         </div>
-  
+
         <div>
           <h2 class="text-lg font-semibold mb-4">Notification Center</h2>
           <div class="bg-gray-100 p-4 rounded-lg">
@@ -188,11 +188,11 @@
 
     </div>
   </template>
-  
+
   <script setup>
- 
+
   </script>
-  
+
   <style>
   body {
     font-family: 'Inter', sans-serif;
