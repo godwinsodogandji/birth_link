@@ -70,5 +70,13 @@ git commit -m "Résolution des conflits"
 
 
 
+git remote add base8 https://github.com/godwinsodogandji/birth_link.git
 
-
+ git fetch base8
+From https://github.com/godwinsodogandji/birth_link
+ * [new branch]      Ange       -> base8/Ange
+ * [new branch]      Chirac     -> base8/Chirac
+ * [new branch]      elyna      -> base8/elyna
+ * [new branch]      godwin     -> base8/godwin
+ * [new branch]      main       -> base8
+git pull base8 Chirac
