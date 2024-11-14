@@ -7,8 +7,22 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <style>
-   body {
+ 
+    body {
       font-family: 'Inter', sans-serif;
+    }
+    .animate-bounce-slow {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      }
+      50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
     }
   </style>
  </head>
@@ -101,6 +115,22 @@
    </aside>
    <main class="flex-1 p-6">
     <section class="mb-6">
+//
+<div class="flex items-center justify-center  " id="app">
+   <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-bounce-slow">
+    <h1 class="text-4xl font-bold text-red-500 mb-4">
+     Joyeux Anniversaire!
+    </h1>
+    <p class="text-gray-700 mb-4">
+     Nous vous souhaitons une journée remplie de joie et de bonheur.
+    </p>
+    <img alt="Image d'anniversaire" class="mx-auto mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/Xfft1a2Whyvl0UqS8WYqTL02ogoo3pmuJM7xu4KXreoN5yhnA.jpg" width="200"/>
+    <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">
+     Merci!
+    </button>
+   </div>
+  </div>
+
      <h2 class="text-2xl font-semibold mb-4 text-red-700">
       Accès Rapide
      </h2>
