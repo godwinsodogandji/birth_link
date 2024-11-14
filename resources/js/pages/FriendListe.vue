@@ -1,56 +1,49 @@
 <template>
-
-
   <div class="bg-red-100">
-
     <Nav />
-
-
-
     <div class="flex">
-       <Aside></Aside>
-
-    <div class="w-full max-w-md mx-auto my-24">
-      <!-- Barre de recherche -->
-      <div class="relative mb-8">
-        <input 
-          v-model="search" 
-          class="w-full py-3 pl-10 pr-4 rounded-full bg-pink-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-          placeholder="Search name" 
-          type="text"
-        />
-        <i class="fas fa-search absolute left-3 top-3 text-gray-500"></i>
-      </div>
+      <Aside></Aside>
+      <div class="w-full max-w-md mx-auto my-24">
+        <!-- Barre de recherche -->
+        <div class="relative mb-8">
+          <input 
+            v-model="search" 
+            class="w-full py-3 pl-10 pr-4 rounded-full bg-pink-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+            placeholder="Search name" 
+            type="text"
+          />
+          <i class="fas fa-search absolute left-3 top-3 text-gray-500"></i>
+        </div>
   
-      <!-- Liste des amis -->
-      <div class="grid grid-cols-1 gap-3">
-        <div v-for="friend in filteredFriends" :key="friend.id" class="flex items-center p-4 bg-white rounded-lg shadow">
-          <img :src="friend.profilePicture" alt="Profile picture" class="w-12 h-12 rounded-full mr-4" />
-          <div>
-            <div class="text-lg font-medium text-gray-900">{{ friend.name }}</div>
-            <div class="text-sm text-gray-500">{{ friend.position }}</div>
+        <!-- Liste des amis avec défilement -->
+        <div 
+          class="grid grid-cols-1 gap-3 overflow-y-auto h-[500px]" 
+          @scroll="handleScroll" 
+          ref="scrollContainer"
+        >
+          <div v-for="friend in displayedFriends" :key="friend.id" class="flex items-center p-4 bg-white rounded-lg shadow">
+            <img :src="friend.profilePicture" alt="Profile picture" class="w-12 h-12 rounded-full mr-4" />
+            <div>
+              <div class="text-lg font-medium text-gray-900">{{ friend.name }}</div>
+              <div class="text-sm text-gray-500">{{ friend.position }}</div>
+            </div>
           </div>
         </div>
+
+        <!-- Loader -->
+        <div v-if="loading" class="text-center py-4">Loading...</div>
       </div>
     </div>
-
-    </div>
-
-
-
-
   </div>
+</template>
 
-  
-  </template>
-  
-  <script setup>
-  import Nav from '@/Pages/Nav.vue'
-  import Aside from '@/Pages/Aside.vue';
-  import { ref, computed } from 'vue';
-  
-  // Liste des amis (à remplacer avec des données réelles ou via une API)
-  const friends = ref([
+<script setup>
+import Nav from '@/Pages/Nav.vue'
+import Aside from '@/Pages/Aside.vue';
+import { ref, computed, watch } from 'vue';
+
+// Liste des amis (à remplacer avec des données réelles ou via une API)
+const friends = ref([
   { id: 1, name: 'Tania Whitestone', position: 'Visualer', profilePicture: 'https://storage.googleapis.com/a1aa/image/9HMgV3pNyj4DMloLfl6swgfZ7mZSXdLuePg9Rggqnnvt7yhnA.jpg' },
   { id: 2, name: 'Tanzil Calahan', position: 'Back-End Programmer', profilePicture: 'https://storage.googleapis.com/a1aa/image/g0uXlfpEX4RMACM6BEnOLJTu3aJy4VF9YA4ATH4sGel5d5wTA.jpg' },
   { id: 3, name: 'Teo Smith', position: 'Front-End Programmer', profilePicture: 'https://storage.googleapis.com/a1aa/image/kFlSBl4YZFZtApN4P4WgLjIzf6PH99YQJ04Wskh3Vz39uc4JA.jpg' },
@@ -73,21 +66,54 @@
   { id: 20, name: 'Henry Fox', position: 'Chief Technology Officer', profilePicture: 'https://storage.googleapis.com/a1aa/image/HenryFoxProfile.jpg' }
 ]);
 
-  
-  // Recherche filtrée
-  const search = ref('');
-  
-  // Computed property pour filtrer les amis en fonction de la recherche
-  const filteredFriends = computed(() => {
-    return friends.value.filter(friend => 
-      friend.name.toLowerCase().includes(search.value.toLowerCase())
-    );
-  });
-  </script>
-  
-  <style scoped>
-  body {
-    font-family: 'Roboto', sans-serif;
+const search = ref('');
+const displayedFriends = ref([]); // Amis affichés
+const loading = ref(false);
+const itemsPerPage = 7; // Nombre d'amis à charger à chaque fois
+let currentPage = 0; // Page actuelle
+
+// Fonction pour charger des amis
+const loadFriends = () => {
+  if (loading.value) return; // Éviter de charger si déjà en cours
+  loading.value = true;
+
+  // Simuler un chargement des amis
+  setTimeout(() => {
+    const filtered = filteredFriends.value.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+    displayedFriends.value.push(...filtered);
+    currentPage++;
+    loading.value = false;
+  }, 1000);
+};
+
+// Computed property pour filtrer les amis en fonction de la recherche
+const filteredFriends = computed(() => {
+  return friends.value.filter(friend => 
+    friend.name.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
+
+// Charger les amis au démarrage
+loadFriends();
+
+// Fonction pour gérer le défilement
+const handleScroll = (event) => {
+  const scrollContainer = event.target;
+  if (scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 10) {
+    loadFriends();
   }
-  </style>
-  
+};
+
+// Watcher pour réinitialiser la pagination lors de la recherche
+watch(search, () => {
+  currentPage = 0;
+  displayedFriends.value = [];
+  loadFriends();
+});
+</script>
+
+<style scoped>
+body {
+  font-family: 'Roboto', sans-serif;
+}
+</style>
