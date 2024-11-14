@@ -7,7 +7,7 @@
       </div>
       <nav class="flex items-center space-x-4">
         <div class="relative group">
-          <button class="flex items-center text-gray-700 hover:text-red-500 transition duration-300 focus:outline-none">
+          <button class="flex items-center text-gray-700 hover:text-red-500 transition duration-300 focus:outline-none" @click="toggleNotifications">
             <i class="fas fa-bell text-2xl mr-2"></i>
           </button>
           <div v-if="showNotifications" class="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg">
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="relative group">
-          <button class="flex items-center text-gray-700 hover:text-red-500 transition duration-300 focus:outline-none">
+          <button class="flex items-center text-gray-700 hover:text-red-500 transition duration-300 focus:outline-none" @click="toggleProfileMenu">
             <i class="fas fa-user-circle text-2xl mr-2"></i>
             <span>Mon Compte</span>
             <i class="fas fa-chevron-down ml-1"></i>
@@ -114,42 +114,42 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      showNotifications: false,
-      showProfileMenu: false,
-      notifications: [
-        'Nouvelle invitation d\'anniversaire',
-        'Rappel: Anniversaire de Jean demain',
-        'Nouveau thème ajouté',
-      ],
-      sidebarItems: [
-        { label: 'Anniversaires', iconClass: 'fas fa-birthday-cake', subItems: ['Prochains', 'Passés'] },
-        { label: 'Amis', iconClass: 'fas fa-users', subItems: ['Liste d\'Amis', 'Invitations'] },
-        { label: 'Thèmes', iconClass: 'fas fa-palette', subItems: ['Thèmes Populaires', 'Personnalisés'] },
-        { label: 'Vœux', iconClass: 'fas fa-envelope', subItems: ['Envoyés', 'Reçus'] },
-      ],
-      quickAccessItems: [
-        { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
-        { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },
-        { title: 'Vœux', count: 237, iconClass: 'fas fa-envelope text-green-500' },
-      ],
-      folders: [
-        { title: 'Anniversaires', count: 3, iconClass: 'fas fa-birthday-cake text-red-500' },
-        { title: 'Amis', count: 84, iconClass: 'fas fa-users text-red-500' },
-      ],
-    };
-  },
-  methods: {
-    toggleNotifications() {
-      this.showNotifications = !this.showNotifications;
-    },
-    toggleProfileMenu() {
-      this.showProfileMenu = !this.showProfileMenu;
-    }
-  }
+<script setup>
+import { ref } from 'vue';
+
+const showNotifications = ref(false);
+const showProfileMenu = ref(false);
+
+const notifications = [
+  'Nouvelle invitation d\'anniversaire',
+  'Rappel: Anniversaire de Jean demain',
+  'Nouveau thème ajouté',
+];
+
+const sidebarItems = [
+  { label: 'Anniversaires', iconClass: 'fas fa-birthday-cake', subItems: ['Prochains', 'Passés'] },
+  { label: 'Amis', iconClass: 'fas fa-users', subItems: ['Liste d\'Amis', 'Invitations'] },
+  { label: 'Thèmes', iconClass: 'fas fa-palette', subItems: ['Thèmes Populaires', 'Personnalisés'] },
+  { label: 'Vœux', iconClass: 'fas fa-envelope', subItems: ['Envoyés', 'Reçus'] },
+];
+
+const quickAccessItems = [
+  { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
+  { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },
+  { title: 'Vœux', count: 237, iconClass: 'fas fa-envelope text-green-500' },
+];
+
+const folders = [
+  { title: 'Anniversaires', count: 3, iconClass: 'fas fa-birthday-cake text-red-500' },
+  { title: 'Amis', count: 84, iconClass: 'fas fa-users text-red-500' },
+];
+
+const toggleNotifications = () => {
+  showNotifications.value = !showNotifications.value;
+};
+
+const toggleProfileMenu = () => {
+  showProfileMenu.value = !showProfileMenu.value;
 };
 </script>
 
