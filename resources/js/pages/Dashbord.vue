@@ -1,142 +1,109 @@
 <template>
-    <div class="flex h-screen bg-gray-100">
-    
-  
-      <!-- Main Content -->
-      <div class="flex-1 p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-semibold">People</h1>
-          <div class="flex items-center">
-            <span class="text-gray-600 mr-4">29 Aug 2019</span>
-            <div class="flex items-center">
-              <img
-                alt="User profile picture"
-                class="rounded-full mr-2"
-                height="40"
-                src="#"
-                width="40"
-              />
-              <span class="text-gray-600">Charles Merl</span>
+  <div class="bg-red-100">
+    <Nav />
+    <div class="flex">
+      <Aside></Aside>
+
+      <main class="flex-1 p-6">
+        <section class="mb-6">
+          <div class="flex items-center justify-center">
+            <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-bounce-slow">
+              <h1 class="text-4xl font-bold text-red-500 mb-4">Joyeux Anniversaire!</h1>
+              <p class="text-gray-700 mb-4">Nous vous souhaitons une journée remplie de joie et de bonheur.</p>
+              <img alt="Image d'anniversaire" class="mx-auto mb-4" height="200"
+                src="https://storage.googleapis.com/a1aa/image/Xfft1a2Whyvl0UqS8WYqTL02ogoo3pmuJM7xu4KXreoN5yhnA.jpg"
+                width="200" />
+              <button
+                class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">Merci!</button>
             </div>
           </div>
-        </div>
-  
-        <div class="flex justify-between items-center mb-6">
-          <div class="flex items-center">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded mr-4">All</button>
-            <button class="text-gray-600 px-4 py-2 rounded">Organization</button>
-          </div>
-          <div class="flex items-center">
-            <input
-              class="border border-gray-300 rounded px-4 py-2 mr-4"
-              placeholder="Search by name"
-              type="text"
-            />
-            <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded mr-4">Design Team</button>
-            <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded mr-4">Position</button>
-            <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded mr-4">More</button>
-            <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded mr-4">Sort by: All</button>
-            <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded">
-              <i class="fas fa-th-large"></i>
-            </button>
-          </div>
-        </div>
-  
-        <div class="grid grid-cols-3 gap-6">
-          <PersonCard
-            name="Henry Paulista"
-            email="henry.paul@mail.com"
-            profilePic="https://storage.googleapis.com/a1aa/image/qN69hcumeEUWa6n7ZdOSuLQE9f4CzPOzHIOsOmhZfHN3kuhnA.jpg"
-            percentage="100%"
-            position="SENIOR CREATIVE DIRECTOR"
-          />
-          <PersonCard
-            name="Evan Jefferson"
-            email="jefferson@mail.com"
-            profilePic="https://storage.googleapis.com/a1aa/image/1miLocockX6IL1R9rdsAnJIZyFBNCROiqXVvc3PwERFm0N8E.jpg"
-            percentage="82%"
-            position="CREATIVE DIRECTOR"
-          />
-          <PersonCard
-            name="Mark Thomson"
-            email="mark.th@mail.com"
-            profilePic="https://storage.googleapis.com/a1aa/image/RHtE6A3NQY6ZPlmJVYOrvHhqReEDyG8F4QAqLFb13UWPpb4JA.jpg"
-            percentage="66%"
-            position="SENIOR UI DESIGNER"
-          />
-          <PersonCard
-            name="Alice McKenzie"
-            email="alice.mck@mail.com"
-            profilePic="https://storage.googleapis.com/a1aa/image/1A9Q7TkavW5xDRN86caurWxewTLQKtmTUkeheLKoUaBvkuhnA.jpg"
-            percentage="100%"
-            position="SENIOR COPYWRITER"
-          />
-          <PersonCard
-            name="Jack Ro"
-            email="jack.ro@mail.com"
-            profilePic="https://storage.googleapis.com/a1aa/image/56QjNUfu6zUFHSJFtxuf1GGD1pUgfvRzZoPQ1MysZDAqkuhnA.jpg"
-            percentage="33%"
-            position="ART DIRECTOR"
-          />
-          <PersonCard
-            name="Anastasia Groetze"
-            email="anastasia.gr@mail.com"
-            profilePic="https://storage.googleapis.com/a1aa/image/e5Pd2eQISEpbfpTpFweC6scLWkGDoSyV5bGZerUffI2KNpb4JA.jpg"
-            percentage="42%"
-            position="SENIOR UI DESIGNER"
-          />
-        </div>
-      </div>
-  
-      <!-- Right Sidebar -->
-      <div class="bg-white w-80 p-6">
-        <div class="mb-6">
-          <h2 class="text-lg font-semibold mb-4">Selected</h2>
-          <div class="bg-gray-100 p-4 rounded-lg">
-            <h3 class="text-lg font-semibold">Design Team</h3>
-          </div>
-        </div>
-  
-        <div class="mb-6">
-          <h2 class="text-lg font-semibold mb-4">Time Log</h2>
-          <div class="relative w-32 h-32 mx-auto">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-2xl font-semibold">74%</span>
+        </section>
+
+        <section class="mb-6">
+          <h2 class="text-2xl font-semibold mb-4 text-red-700">Nouveautés</h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div v-for="(item, index) in quickAccessItems" :key="index"
+              class="bg-red-100 p-4 rounded flex items-center shadow-md">
+              <i :class="item.iconClass" class="text-2xl mr-4"></i>
+              <div>
+                <p class="text-red-500 font-semibold">{{ item.title }}</p>
+                <p class="text-gray-500">{{ item.count }} événements</p>
+              </div>
             </div>
-            <svg class="w-full h-full">
-              <circle class="text-gray-200" cx="50%" cy="50%" fill="none" r="45%" stroke="currentColor" stroke-width="10"></circle>
-              <circle class="text-blue-500" cx="50%" cy="50%" fill="none" r="45%" stroke="currentColor" stroke-dasharray="282.743" stroke-dashoffset="73.513" stroke-width="10"></circle>
-            </svg>
           </div>
-        </div>
-  
-        <div class="mb-6">
-          <h2 class="text-lg font-semibold mb-4">Projects</h2>
-          <div class="grid grid-cols-2 gap-4">
-            <ProjectCard title="Total" count="148" />
-            <ProjectCard title="Completed" count="56" />
-            <ProjectCard title="In Progress" count="76" />
-            <ProjectCard title="Waiting" count="16" />
+        </section>
+
+        <section class="mb-6">
+          <h2 class="text-2xl font-semibold mb-4 text-red-700">Récents</h2>
+          <div class="grid grid-cols-4 gap-4">
+            <div v-for="(folder, index) in folders" :key="index"
+              class="bg-white p-4 rounded flex items-center shadow-md">
+              <i :class="folder.iconClass" class="text-2xl mr-4"></i>
+              <div>
+                <p class="text-gray-700 font-semibold">{{ folder.title }}</p>
+                <p class="text-gray-500">{{ folder.count }} événements</p>
+              </div>
+            </div>
           </div>
-        </div>
-  
-        <div>
-          <h2 class="text-lg font-semibold mb-4">Notification Center</h2>
-          <div class="bg-gray-100 p-4 rounded-lg">
-            <h3 class="text-lg font-semibold">Internal messages</h3>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-semibold mb-4 text-red-700">Anniversaires Récents</h2>
+          <div class="bg-white p-4 rounded shadow-md">
+            <div class="flex items-center mb-4">
+              <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4"></i>
+              <div class="flex-1">
+                <p class="text-gray-700 font-semibold">Anniversaire de Jean</p>
+                <p class="text-gray-500">Nov 11, 2021 | 12:54</p>
+              </div>
+              <p class="text-gray-500">Seulement vous</p>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
     </div>
-  </template>
-  
-  <script setup>
- 
-  </script>
-  
-  <style>
-  body {
-    font-family: 'Inter', sans-serif;
+  </div>
+</template>
+
+<script setup>
+import Nav from '@/Pages/Nav.vue'
+import Aside from '@/Pages/Aside.vue';
+
+import { ref } from 'vue';
+const quickAccessItems = [
+  { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
+  { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },
+  { title: 'Vœux', count: 237, iconClass: 'fas fa-envelope text-green-500' },
+];
+
+const folders = [
+  { title: 'Anniversaires', count: 3, iconClass: 'fas fa-birthday-cake text-red-500' },
+  { title: 'Amis', count: 84, iconClass: 'fas fa-users text-red-500' },
+];
+
+</script>
+
+<style scoped>
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
-  </style>
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+</style>
