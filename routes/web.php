@@ -10,5 +10,5 @@ Route::get('/', function () {
 });
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
-Route::get('/dashboard', [DashbordController::class, 'index'])->name('ajoutdesamis');
+Route::get('/dashboard', [DashbordController::class, 'index'])->name('dashbord');
 Route::get('/friends', [FriendController::class, 'index'])->name('friends');
