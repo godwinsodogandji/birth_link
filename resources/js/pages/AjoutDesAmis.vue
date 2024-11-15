@@ -8,7 +8,7 @@
         <div class="flex">
             <Aside></Aside>
 
-            <div class="flex flex-col items-center mt-10">
+            <div class="flex justify-center flex-col items-center mt-10">
 
                 <form class="max-w-md mx-auto w-full mb-4 p-5">
                     <label for="default-search"
@@ -29,24 +29,23 @@
                     </div>
                 </form>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
-                    <div v-for="(user, index) in filteredUsers" :key="index"
-                        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex justify-center items-center min-h-screen bg-gray-100">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
+                      <div v-for="(user, index) in filteredUsers" :key="index" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-4">
                         <div class="flex flex-col items-center p-2">
-                            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="user.image" alt="User image" />
-                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.name }}</h5>
-                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.role }}</span>
-                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.promo }}</span>
-                            <div class="flex mt-4 md:mt-6">
-                                <a href="#"
-                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Ajouter</a>
-                                <a href="#"
-                                    class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Supprimer</a>
-                            </div>
+                          <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="user.image" alt="User image" />
+                          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.name }}</h5>
+                          <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.role }}</span>
+                          <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.promo }}</span>
+                          <div class="flex mt-4 md:mt-6">
+                            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Ajouter</a>
+                            <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Supprimer</a>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                </div>
-
+                  </div>
+                  
                 <div class="mt-9 flex items-center">
                     <button @click="prevPage" :disabled="currentPage === 1"
                         class="px-4 py-2 bg-red-600 text-white rounded-l">
@@ -68,9 +67,9 @@
 </template>
 
 <script setup>
-import Nav from '@/Pages/Nav.vue'
 import Aside from '@/Pages/Aside.vue';
-import { ref, computed } from 'vue';
+import Nav from '@/Pages/Nav.vue';
+import { computed, ref } from 'vue';
 
 // Exemple de données utilisateurs
 const users = ref([
