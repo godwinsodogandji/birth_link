@@ -1,5 +1,6 @@
 <template>
-    <aside class="w-64 bg-white   shadow-lg fixed top-25 left-0 z-40  h-screen transition-transform -translate-x-full sm:translate-x-0">
+    <aside
+        class="w-64 bg-white   shadow-lg fixed top-25 left-0 z-40  h-screen transition-transform -translate-x-full sm:translate-x-0">
         <button class="bg-red-500 text-white py-2 px-4 rounded mb-6 hover:bg-red-600 transition duration-300">
             Créer Nouveau
         </button>
@@ -38,7 +39,7 @@
                         </li>
                         <li class="mb-2">
                             <a class="text-gray-500 hover:text-red-500 transition duration-300" href="/ajoutdesamis">
-                               Ajout des amis
+                                Ajout des amis
                             </a>
                         </li>
                         <li class="mb-2">
