@@ -1,64 +1,6 @@
 <template>
-  <div class="bg-red-100">
-    <her class="bg-white shadow-md p-4 flex justify-between items-center">
-      <div class="flex items-center">
-        <i class="fas fa-birthday-cake text-red-500 text-3xl mr-2"></i>
-        <h1 class="text-2xl font-bold text-red-700">Anniversaire Dashboard</h1>
-      </div>
-      <nav class="flex items-center space-x-4">
-        <div class="relative group">
-          <button class="flex items-center text-gray-700 hover:text-red-500 transition duration-300 focus:outline-none" @click="toggleNotifications">
-            <i class="fas fa-bell text-2xl mr-2"></i>
-          </button>
-          <div v-if="showNotifications" class="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg">
-            <div class="p-4">
-              <p class="text-gray-700 font-semibold">Notifications</p>
-              <ul>
-                <li v-for="(notification, index) in notifications" :key="index" class="mt-2">
-                  <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">{{ notification }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="relative group">
-          <button class="flex items-center text-gray-700 hover:text-red-500 transition duration-300 focus:outline-none" @click="toggleProfileMenu">
-            <i class="fas fa-user-circle text-2xl mr-2"></i>
-            <span>Mon Compte</span>
-            <i class="fas fa-chevron-down ml-1"></i>
-          </button>
-          <div v-if="showProfileMenu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Profil</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Paramètres</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Déconnexion</a>
-          </div>
-        </div>
-      </nav>
-    </her>
 
-    <div class="flex">
-      <aside class="w-64 bg-white p-4 shadow-lg">
-        <button class="bg-red-500 text-white py-2 px-4 rounded mb-6 hover:bg-red-600 transition duration-300">
-          Créer Nouveau
-        </button>
-        <nav>
-          <ul>
-            <li class="mb-4" v-for="(menuItem, index) in sidebarItems" :key="index">
-              <a class="flex items-center text-gray-700 hover:text-red-500 transition duration-300" href="#">
-                <i :class="menuItem.iconClass" class="mr-2"></i>
-                {{ menuItem.label }}
-              </a>
-              <ul class="ml-6 mt-2">
-                <li v-for="(subItem, subIndex) in menuItem.subItems" :key="subIndex" class="mb-2">
-                  <a class="text-gray-500 hover:text-red-500 transition duration-300" href="#">{{ subItem }}</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-
-      <main class="flex-1 p-6">
+    <main class="flex-1 p-6">
         <section class="mb-6">
           <div class="flex items-center justify-center">
             <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-bounce-slow">
@@ -110,14 +52,11 @@
           </div>
         </section>
       </main>
-    </div>
-  </div>
-  <Contenu></Contenu>
+  
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import Contenu from './Contenu.vue';
 
 const showNotifications = ref(false);
 const showProfileMenu = ref(false);
@@ -154,3 +93,22 @@ const toggleProfileMenu = () => {
   showProfileMenu.value = !showProfileMenu.value;
 };
 </script>
+
+<style scoped>
+body {
+  font-family: 'Inter', sans-serif;
+}
+.animate-bounce-slow {
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+</style>
