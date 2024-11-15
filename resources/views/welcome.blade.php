@@ -81,12 +81,12 @@
   </div>
 
   <!-- Card 6 -->
-  <div id="card-6" class="card hidden bg-blue-100 p-6 rounded-lg shadow-md text-center
+  <div id="card-6" class="card hidden bg-blue-100 p-6 rounded-full shadow-md text-center
   flex items-center justify-center flex-col bg-cover bg-no-repeat bg-center relative" 
   style="background-image: url('/images/design.png'); width: 1000px; max-width: 100%; height: 900px;">
   <div class="shadow-lg p-6 rounded-lg bg-white">
-    <p class="text-black font-semibold text-5xl">Joyeux anniversaire!</p>
-    <p class="text-black font-semibold text-5xl">Que cette nouvelle année soit encore meilleure que la précédente.</p>
+    <p class="text-black font-semibold text-3xl">Joyeux anniversaire!</p>
+    <p class="text-black font-semibold text-3xl">Que cette nouvelle année soit encore meilleure que la précédente.</p>
   </div>
   
 <button class="absolute bottom-4 right-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">Envoyer</button>
