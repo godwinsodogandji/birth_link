@@ -23,7 +23,7 @@
 
                 
                 <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Invitations</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3  mb-20 gap-4 max-w-screen-xl mx-auto">
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3  mb-20 gap-4 max-w mx-auto">
                     <div v-for="(user, index) in filteredUsers" :key="index"
                         class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <img class="object-cover w-full rounded-t-lg h-screen md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
