@@ -32,6 +32,7 @@ class UserFactory extends Factory
             'email_verified' => true,
             'remember_token' => Str::random(10),
             'profile_picture' => fake()->imageUrl(640, 480, 'people'),
+            'promo' => fake()->word(),
         ];
     }
 

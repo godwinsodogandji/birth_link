@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'email_verified' => true,
             'date_of_birth' => '2020-01-01',
             'profile_picture' => 'profile_pictures/test_user.png', // Chemin d'image fictif
+            'promo' => 'Promo2024'
         ]);
     }
 }
