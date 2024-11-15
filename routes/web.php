@@ -33,10 +33,11 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/udpate', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-Route::get('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');

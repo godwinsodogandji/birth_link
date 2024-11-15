@@ -112,7 +112,6 @@
       </main>
     </div>
   </div>
-  <Contenu></Contenu>
 </template>
 
 <script setup>
