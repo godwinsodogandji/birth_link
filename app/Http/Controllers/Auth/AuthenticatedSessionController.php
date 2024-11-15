@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
+use App\Models\User; 
 
 class AuthenticatedSessionController extends Controller
 {
@@ -18,10 +19,19 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required|string',
         ]);
 
+        // Vérifier si l'utilisateur existe
+        $user = User::where('username', $credentials['username'])->first();
+
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'username' => 'Ce compte n\'existe pas. Veuillez vous inscrire.',
+            ]);
+        }
+
         // Vérifier les identifiants
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return Inertia::location(route(name: 'dashboard'));
+            return Inertia::location(route('dashboard'));
         }
 
         // Si les identifiants sont incorrects, renvoyer une erreur
@@ -30,4 +40,3 @@ class AuthenticatedSessionController extends Controller
         ]);
     }
 }
-

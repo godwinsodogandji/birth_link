@@ -4,7 +4,6 @@ use App\Http\Controllers\AjoutDesAmisController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashbordController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
