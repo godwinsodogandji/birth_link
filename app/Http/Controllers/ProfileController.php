@@ -10,9 +10,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // Récupérer l'utilisateur connecté
         $user = Auth::user();
-        // Récupérer les informations de l'utilisateur
+        // dd($user);
         return Inertia::render('Profile', [
             'user' => $user,
         ]);
@@ -35,6 +34,7 @@ class ProfileController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'date_of_birth' => 'nullable|date',
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'promo' => 'nullable|string|max:255',
         ]);
 
         // Vérifiez si une image a été téléchargée

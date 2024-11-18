@@ -73,7 +73,6 @@
     </div>
 </template>
 <script setup>
-import Nav from '@/Pages/Nav.vue'
 import Aside from '@/Pages/Aside.vue';
 import { ref, computed, reactive, onMounted, onBeforeUnmount } from 'vue';
 const props = usePage().props;

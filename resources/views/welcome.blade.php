@@ -32,9 +32,9 @@
             <nav class="flex flex-col items-center space-y-4">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
+                        {{-- <a href="{{ url('/dashboard') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
                             Dashboard
-                        </a>
+                        </a> --}}
                     @else
                         <a href="{{ route('login') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
                             Log in

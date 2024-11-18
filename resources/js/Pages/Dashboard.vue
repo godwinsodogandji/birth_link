@@ -112,28 +112,12 @@
       </main>
     </div>
   </div>
-  <Contenu></Contenu>
+
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import Contenu from './Contenu.vue';
-
-const showNotifications = ref(false);
-const showProfileMenu = ref(false);
-
-const notifications = [
-  'Nouvelle invitation d\'anniversaire',
-  'Rappel: Anniversaire de Jean demain',
-  'Nouveau thème ajouté',
-];
-
-const sidebarItems = [
-  { label: 'Anniversaires', iconClass: 'fas fa-birthday-cake', subItems: ['Prochains', 'Passés'] },
-  { label: 'Amis', iconClass: 'fas fa-users', subItems: ['Liste d\'Amis', 'Invitations'] },
-  { label: 'Thèmes', iconClass: 'fas fa-palette', subItems: ['Thèmes Populaires', 'Personnalisés'] },
-  { label: 'Vœux', iconClass: 'fas fa-envelope', subItems: ['Envoyés', 'Reçus'] },
-];
+import Aside from '@/Pages/Aside.vue';
+import Nav from '@/Pages/Nav.vue';
 
 const quickAccessItems = [
   { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
