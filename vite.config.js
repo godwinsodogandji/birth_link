@@ -8,6 +8,6 @@ export default defineConfig({
             input: ['resources/js/app.js', 'resources/css/app.css'],
             refresh: true,
         }),
-        vue(), // Assurez-vous que le plugin Vue est ajouté ici
+        vue(), 
     ],
 });

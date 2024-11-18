@@ -1,238 +1,62 @@
-<html>
- <head>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <script src="https://registry.npmmirror.com/vue/3.3.11/files/dist/vue.global.js">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <style>
- 
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .animate-bounce-slow {
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-      }
-      50% {
-        transform: translateY(0);
-        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-      }
-    }
-  </style>
- </head>
- <body class="bg-red-100">
-  <div class="flex" id="app">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Souhaits d'Anniversaire</title>
 
-  
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-   <main class="flex-1 p-6">
-    <section class="mb-6">
-//
-<div class="flex items-center justify-center  " id="app">
-   <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-bounce-slow">
-    <h1 class="text-4xl font-bold text-red-500 mb-4">
-     Joyeux Anniversaire!
-    </h1>
-    <p class="text-gray-700 mb-4">
-     Nous vous souhaitons une journée remplie de joie et de bonheur.
-    </p>
-    <img alt="Image d'anniversaire" class="mx-auto mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/Xfft1a2Whyvl0UqS8WYqTL02ogoo3pmuJM7xu4KXreoN5yhnA.jpg" width="200"/>
-    <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">
-     Merci!
-    </button>
-   </div>
-  </div>
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+    @endif
+</head>
+<body class="font-sans antialiased">
 
-     <h2 class="text-2xl font-semibold mb-4 text-red-700">
-      Accès Rapide
-     </h2>
-     <div class="grid grid-cols-3 gap-4">
-      <div class="bg-red-100 p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-red-500 font-semibold">
-         Anniversaires
-        </p>
-        <p class="text-gray-500">
-         8 événements
-        </p>
-       </div>
-       <div class="ml-auto flex -space-x-2">
-           </div>
-      </div>
-      <div class="bg-white p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-users text-blue-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-gray-700 font-semibold">
-         Amis
-        </p>
-        <p class="text-gray-500">
-         12 amis
-        </p>
-       </div>
-       <div class="ml-auto flex -space-x-2">
-        <img alt="User 1" class="w-6 h-6 rounded-full border-2 border-white" height="24" src="https://storage.googleapis.com/a1aa/image/NznU6n3gBLqgFJnnBMKkJ6d5q27b1UAwwzEiTVXdYiflob4JA.jpg" width="24"/>
-        <img alt="User 2" class="w-6 h-6 rounded-full border-2 border-white" height="24" src="https://storage.googleapis.com/a1aa/image/4bsMSvIgfkwyFyxGX8eOZ2AzPtvAhiesJ0XUDZZOt8PUiuhnA.jpg" width="24"/>
-       </div>
-      </div>
-      <div class="bg-white p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-envelope text-green-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-gray-700 font-semibold">
-         Vœux
-        </p>
-        <p class="text-gray-500">
-         237 vœux
-        </p>
-       </div>
-       <div class="ml-auto flex -space-x-2">
-        <img alt="User 1" class="w-6 h-6 rounded-full border-2 border-white" height="24" src="https://storage.googleapis.com/a1aa/image/NznU6n3gBLqgFJnnBMKkJ6d5q27b1UAwwzEiTVXdYiflob4JA.jpg" width="24"/>
-       </div>
-      </div>
-     </div>
-    </section>
-    <section class="mb-6">
-     <h2 class="text-2xl font-semibold mb-4 text-red-700">
-      Dossiers
-     </h2>
-     <div class="grid grid-cols-4 gap-4">
-      <div class="bg-white p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-gray-700 font-semibold">
-         Anniversaires
-        </p>
-        <p class="text-gray-500">
-         3 événements
-        </p>
-      
-        </p>
-       </div>
-      </div>
-      <div class="bg-white p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-users text-red-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-gray-700 font-semibold">
-         Amis
-        </p>
-        <p class="text-gray-500">
-         84 amis
-        </p>
-       
-        </p>
-       </div>
-      </div>
-      <div class="bg-white p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-palette text-red-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-gray-700 font-semibold">
-         Thèmes
-        </p>
-        <p class="text-gray-500">
-         287 thèmes
-        </p>
-       
-       </div>
-      </div>
-      <div class="bg-white p-4 rounded flex items-center shadow-md">
-       <i class="fas fa-envelope text-red-500 text-2xl mr-4">
-       </i>
-       <div>
-        <p class="text-gray-700 font-semibold">
-         Vœux
-        </p>
-        <p class="text-gray-500">
-         56 vœux
-        </p>
-      
-       </div>
-      </div>
-     </div>
-    </section>
-    <section>
-     <h2 class="text-2xl font-semibold mb-4 text-red-700">
-      Anniversaires Récents
-     </h2>
-     <div class="bg-white p-4 rounded shadow-md">
-      <div class="flex items-center mb-4">
-       <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4">
-       </i>
-       <div class="flex-1">
-        <p class="text-gray-700 font-semibold">
-         Anniversaire de Jean
-        </p>
-        <p class="text-gray-500">
-         Nov 11, 2021 | 12:54
-        </p>
-       </div>
-       <p class="text-gray-500">
-        Seulement vous
-       </p>
-      </div>
-     <div class="flex items-center mb-4">
-       <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4">
-       </i>
-         <div class="flex-1">
-        <p class="text-gray-700 font-semibold">
-         Anniversaire de Jean
-        </p>
-        <p class="text-gray-500">
-         Nov 10, 2021 | 11:15
-        </p>
-       </div>
-       <p class="text-gray-500">
-        10 membres
-       </p>
-      </div>
-     <div class="flex items-center mb-4">
-       <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4">
-       </i>
-        <div class="flex-1">
-        <p class="text-gray-700 font-semibold">
-         Anniversaire de Jean
-        </p>
-        <p class="text-gray-500">
-         Nov 10, 2021 | 10:26
-        </p>
-       </div>
-       <p class="text-gray-500">
-        6 membres
-       </p>
-      </div>
-      <div class="flex items-center mb-4">
-       <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4">
-       </i>
-        <div class="flex-1">
-        <p class="text-gray-700 font-semibold">
-         Anniversaire de Jean
-        </p>
-        <p class="text-gray-500">
-         Nov 9, 2021 | 09:37
-        </p>
-       </div>
-       <p class="text-gray-500">
-        3 membres
-       </p>
-      </div>
-     </div>
-    </section>
-   </main>
-  </div>
-  <script>
-   const { createApp } = Vue;
-    createApp({}).mount('#app');
-  </script>
- </body>
+    <div class="relative min-h-screen flex items-center justify-center bg-[url('/animations/flat-lay-composition-birthday-elements-with-copyspace.jpg')] bg-cover bg-center">
+
+        <div class="absolute inset-0 z-0 opacity-30"></div>
+
+        <div class="w-full max-w-lg p-6 bg-white dark:bg-gray-900 bg-opacity-80 rounded-xl shadow-xl space-y-6 z-10">
+            <header class="text-center">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Bienvenue dans votre application de souhaits d'anniversaire!</h1>
+                <p class="text-gray-600 dark:text-gray-400">Connectez-vous ou inscrivez-vous pour commencer à célébrer!</p>
+            </header>
+
+            <div id="lottieAnimation" class="animation-container h-64 w-full flex justify-center items-center"></div>
+
+            <nav class="flex flex-col items-center space-y-4">
+                @if (Route::has('login'))
+                    @auth
+                        {{-- <a href="{{ url('/dashboard') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
+                            Dashboard
+                        </a> --}}
+                    @else
+                        <a href="{{ route('login') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
+                            Log in
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="w-full text-center rounded-md bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-2 transition hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                @endif
+            </nav>
+        </div>
+    </div>
+
+    <style scoped>
+        .animation-container {
+            width: 100%;
+            height: 300px;
+            margin: auto;
+        }
+    </style>
+</body>
 </html>
