@@ -43,3 +43,10 @@ Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajo
 Route::get('/suggestion-des-amis', [AmisSuggererController::class, 'index'])->name('suggestion-des-amis');
 Route::get('/confirmation-des-amis', [AmisSuggererController::class, 'confirmation'])->name('confirmation-des-amis');
 Route::get('/friends', [FriendController::class, 'index'])->name('friends');
+
+
+// Route::middleware(['auth'])->group(function () {
+    Route::get('/ajout-des-amis', [FriendController::class, 'index'])->name('friends.index');
+    Route::post('/friends/send-request', [FriendController::class, 'sendFriendRequest'])->name('friends.sendRequest');
+    // Ajoutez d'autres routes pour accepter et supprimer des amis
+// });

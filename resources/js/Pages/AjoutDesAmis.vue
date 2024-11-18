@@ -5,7 +5,7 @@
             <Aside />
 
             <div class="flex  flex-col items-center mt-5 mb-5  justify-center w-full ml-40">
-                <form class="max-w-md mx-auto w-full mb-4">
+                <form @submit.prevent="searchUsers" class="max-w-md mx-auto w-full mb-4">
                     <label for="default-search"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
@@ -53,8 +53,10 @@
                                 class="absolute right-0 z-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                 <ul class="py-2" aria-labelledby="dropdownButton">
                                     <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Ajouter</a>
+                                        <button @click="sendFriendRequest(user.id)" :disabled="user.requestSent"
+                                            href="#"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                            {{ user.requestSent ? 'Demande envoyée' : 'Ajouter' }}</button>
                                     </li>
                                     <li>
                                         <a href="#"
@@ -74,7 +76,36 @@
 import Nav from '@/Pages/Nav.vue'
 import Aside from '@/Pages/Aside.vue';
 import { ref, computed, reactive, onMounted, onBeforeUnmount } from 'vue';
+const props = usePage().props;
+const users = ref(props.users);
 
+const sendFriendRequest = async (userId) => {
+    try {
+        const response = await fetch(`/friend-request/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Error sending friend request');
+        }
+
+        const data = await response.json();
+        alert(data.message);
+
+        // Marquer l'utilisateur comme ayant envoyé une demande
+        const user = users.value.find(user => user.id === userId);
+        if (user) {
+            user.requestSent = true;
+        }
+    } catch (error) {
+        console.error(error);
+        alert('Une erreur s\'est produite lors de l\'envoi de la demande d\'ami.');
+    }
+};
 // État pour le dropdown
 const isDropdownOpen = ref(false);
 
@@ -126,83 +157,83 @@ onBeforeUnmount(() => {
     document.removeEventListener('click', closeDropdown);
 });
 
-const users = reactive([
-    { name: 'Bonnie Green', role: 'Visual Designer', image: '/images/ninho.jpg', promo: 'Promo1', amiEnCommun: '1 amis(e) en commun' },
-    { name: 'John Doe', role: 'Web Developer', image: '/images/ninho.jpg', promo: 'Promo2', amiEnCommun: '2 amis(e) en commun' },
-    { name: 'Jane Smith', role: 'Product Manager', image: '/images/ninho.jpg', promo: 'Promo3', amiEnCommun: '3 amis(e) en commun' },
-    { name: 'Alice Johnson', role: 'UX Designer', image: '/images/ninho.jpg', promo: 'Promo4', amiEnCommun: '4 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-    { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
-    { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
-]);
+// const users = reactive([
+//     { name: 'Bonnie Green', role: 'Visual Designer', image: '/images/ninho.jpg', promo: 'Promo1', amiEnCommun: '1 amis(e) en commun' },
+//     { name: 'John Doe', role: 'Web Developer', image: '/images/ninho.jpg', promo: 'Promo2', amiEnCommun: '2 amis(e) en commun' },
+//     { name: 'Jane Smith', role: 'Product Manager', image: '/images/ninho.jpg', promo: 'Promo3', amiEnCommun: '3 amis(e) en commun' },
+//     { name: 'Alice Johnson', role: 'UX Designer', image: '/images/ninho.jpg', promo: 'Promo4', amiEnCommun: '4 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+//     { name: 'Charlie Black', role: 'Data Analyst', image: '/images/ninho.jpg', promo: 'Promo6', amiEnCommun: '6 amis(e) en commun' },
+//     { name: 'Bob Brown', role: 'Marketing Specialist', image: '/images/ninho.jpg', promo: 'Promo5', amiEnCommun: '5 amis(e) en commun' },
+// ]);
 
-const itemsPerPage = 3;
 const searchQuery = ref('');
 
-const filteredUsers = computed(() => {
-    const lowerCaseQuery = searchQuery.value.toLowerCase();
-    return users.value.filter(user => {
-        return user.name.toLowerCase().includes(lowerCaseQuery) ||
-            user.role.toLowerCase().includes(lowerCaseQuery) ||
-            user.promo.toLowerCase().includes(lowerCaseQuery);
-    });
-});
-const visibleNotifications = ref(users.slice(0, 5));
+// const filteredUsers = computed(() => {
+//     const lowerCaseQuery = searchQuery.value.toLowerCase();
+//     return users.value.filter(user => {
+//         return user.name.toLowerCase().includes(lowerCaseQuery) ||
+//             user.role.toLowerCase().includes(lowerCaseQuery) ||
+//             user.promo.toLowerCase().includes(lowerCaseQuery);
+//     });
+// });
+
+// const visibleNotifications = ref(users.slice(0, 5));
 const loading = ref(false);
 const notificationContainer = ref(null);
 
 // Fonction pour charger plus de notifications
-function loadMoreNotifications() {
-    if (loading.value || visibleNotifications.value.length >= users.length) return;
-    loading.value = true;
+// function loadMoreNotifications() {
+//     if (loading.value || visibleNotifications.value.length >= users.length) return;
+//     loading.value = true;
 
-    setTimeout(() => {
-        const currentLength = visibleNotifications.value.length;
-        const nextNotifications = users.slice(currentLength, currentLength + 5);
-        visibleNotifications.value.push(...nextNotifications);
-        loading.value = false;
-    }, 2000);
-}
+//     setTimeout(() => {
+//         const currentLength = visibleNotifications.value.length;
+//         const nextNotifications = users.slice(currentLength, currentLength + 5);
+//         visibleNotifications.value.push(...nextNotifications);
+//         loading.value = false;
+//     }, 2000);
+// }
 
 // Fonction pour gérer le défilement
-function handleScroll() {
-    const { scrollTop, clientHeight, scrollHeight } = notificationContainer.value;
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
-        loadMoreNotifications();
-    }
-}
+// function handleScroll() {
+//     const { scrollTop, clientHeight, scrollHeight } = notificationContainer.value;
+//     if (scrollTop + clientHeight >= scrollHeight - 5) {
+//         loadMoreNotifications();
+//     }
+// }
 
 // Exemple de données utilisateurs
 // const users = ref([
