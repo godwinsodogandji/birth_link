@@ -6,7 +6,7 @@
         <div class="flex flex-grow ">
             <Aside></Aside>
 
-            <div class="flex flex-col items-center mt-5 mb-5 justify-center w-full">
+            <div class="flex  flex-col items-center mt-5 mb-5  justify-center w-full ml-40">
                 <form class="max-w-md mx-auto w-full mb-4">
                     <label for="default-search"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -28,7 +28,7 @@
 
                 <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Connaissez-vous peut-être :</h2>
 
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3  mb-20 gap-4 max-w mx-auto notification-page"
+                <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4  ml-40 mb-20 gap-10 max-w mx-auto notification-page"
                     @scroll="handleScroll" ref="notificationContainer">
                     <div v-for="(user, index) in users" :key="index"
                         class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -215,6 +215,10 @@ function handleScroll() {
 </script>
 
 <style>
+body {
+    font-family: 'Inter', sans-serif;
+}
+
 body {
     font-family: 'Inter', sans-serif;
 }

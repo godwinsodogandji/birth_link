@@ -3,7 +3,8 @@
         <Nav />
         <div class="flex flex-grow">
             <Aside />
-            <div class="flex flex-col items-center mt-5 mb-5 justify-center w-full">
+
+            <div class="flex  flex-col items-center mt-5 mb-5  justify-center w-full ml-40">
                 <form class="max-w-md mx-auto w-full mb-4">
                     <label for="default-search"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -26,7 +27,7 @@
                 <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Invitations</h2>
 
 
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3  mb-20 gap-4 max-w mx-auto notification-page"
+                <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4  ml-40 mb-20 gap-10 max-w mx-auto notification-page"
                     @scroll="handleScroll" ref="notificationContainer">
                     <div v-for="(user, index) in users" :key="index"
                         class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -39,7 +40,7 @@
                             <a href="#" class="text-sm text-gray-500 dark:text-gray-400">{{ user.amiEnCommun }}</a>
                         </div>
 
-                        <div class="flex justify-end mt-0 pt-0 mb-20 relative">
+                        <div class="flex justify-end  mb-20 relative">
                             <button @click="toggleDropdown(index)" 
                                 class=" dropdown-menu inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                                 type="button">
@@ -70,7 +71,6 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -221,6 +221,10 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    font-family: 'Inter', sans-serif;
+}
+
 .notification-page {
 
     box-shadow: 0 4px 30px rgba(243, 122, 122, 0.1);
@@ -261,5 +265,4 @@ body {
         opacity: 1;
     }
 }
-
 </style>
