@@ -64,14 +64,13 @@
 
     </div>
   </div>
-  <Contenu></Contenu>
+ 
 </template>
 
 <script setup>
-import Nav from '@/Pages/Nav.vue'
 import Aside from '@/Pages/Aside.vue';
+import Nav from '@/Pages/Nav.vue';
 
-import { ref } from 'vue';
 const quickAccessItems = [
   { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
   { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },

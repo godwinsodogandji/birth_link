@@ -1,109 +1,119 @@
 <template>
-    <div class="bg-red-100">
-      <Nav />
-      <div class="flex">
-        <Aside></Aside>
+
+   
+        <Nav />
+        
+          <Aside></Aside>
+    
+        
+    <div class="flex items-center justify-center min-h-screen p-6 bg-gray-100">
+      <!-- Sidebar for Buttons -->
+      <div class="space-y-6 mr-20">
+        <button
+          @click="showCard(1)"
+          class="bg-red-500 text-white py-2 px-4 rounded w-full hover:bg-red-600 transition"
+        >
+          Carte 1
+        </button>
+      </div>
   
-        <main class="flex-1 p-6">
-          <section class="mb-6">
-            <div class="flex items-center justify-center">
-              <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-bounce-slow">
-                <h1 class="text-4xl font-bold text-red-500 mb-4">Joyeux Anniversaire!</h1>
-                <p class="text-gray-700 mb-4">Nous vous souhaitons une journée remplie de joie et de bonheur.</p>
-                <img alt="Image d'anniversaire" class="mx-auto mb-4" height="200"
-                  src="https://storage.googleapis.com/a1aa/image/Xfft1a2Whyvl0UqS8WYqTL02ogoo3pmuJM7xu4KXreoN5yhnA.jpg"
-                  width="200" />
-                <button
-                  class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">Merci!</button>
-              </div>
-            </div>
-          </section>
+      <!-- Container for Cards -->
+      <section class="grid grid-cols-1 gap-4 ml-8">
+        <div
+          v-if="currentCard === 1"
+          class="card bg-gradient-to-r from-red-500 to-red-700 p-6 rounded-lg shadow-md text-center flex items-center justify-center flex-col bg-cover"
+          style="min-height: 990px; min-width: 850px;"
+        >
+          <textarea
+            v-model="cardText"
+            :readonly="!isEditing"
+            class="bg-transparent text-white font-semibold text-xl text-center w-full h-full resize-none focus:outline-none"
+            rows="10"
+          >
+          </textarea>
+          <div class="mt-4 space-x-4">
+            <button
+              @click="editText"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition"
+            >
+              Personnaliser le texte
+            </button>
+            <button
+              @click="saveText"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition"
+            >
+              Enregistrer
+            </button>
+            <button
+              @click="sendText"
+              class="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition"
+            >
+              Envoyer
+            </button>
+          </div>
+        </div>
+      </section>
   
-          <section class="mb-6">
-            <h2 class="text-2xl font-semibold mb-4 text-red-700">Nouveautés</h2>
-            <div class="grid grid-cols-3 gap-4">
-              <div v-for="(item, index) in quickAccessItems" :key="index"
-                class="bg-red-100 p-4 rounded flex items-center shadow-md">
-                <i :class="item.iconClass" class="text-2xl mr-4"></i>
-                <div>
-                  <p class="text-red-500 font-semibold">{{ item.title }}</p>
-                  <p class="text-gray-500">{{ item.count }} événements</p>
-                </div>
-              </div>
-            </div>
-          </section>
-  
-          <section class="mb-6">
-            <h2 class="text-2xl font-semibold mb-4 text-red-700">Récents</h2>
-            <div class="grid grid-cols-4 gap-4">
-              <div v-for="(folder, index) in folders" :key="index"
-                class="bg-white p-4 rounded flex items-center shadow-md">
-                <i :class="folder.iconClass" class="text-2xl mr-4"></i>
-                <div>
-                  <p class="text-gray-700 font-semibold">{{ folder.title }}</p>
-                  <p class="text-gray-500">{{ folder.count }} événements</p>
-                </div>
-              </div>
-            </div>
-          </section>
-  
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-red-700">Anniversaires Récents</h2>
-            <div class="bg-white p-4 rounded shadow-md">
-              <div class="flex items-center mb-4">
-                <i class="fas fa-birthday-cake text-red-500 text-2xl mr-4"></i>
-                <div class="flex-1">
-                  <p class="text-gray-700 font-semibold">Anniversaire de Jean</p>
-                  <p class="text-gray-500">Nov 11, 2021 | 12:54</p>
-                </div>
-                <p class="text-gray-500">Seulement vous</p>
-              </div>
-            </div>
-          </section>
-        </main>
-  
+      <!-- Modal -->
+      <div
+        v-if="showModal"
+        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
+      >
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+          <h2 class="text-xl font-bold mb-4">Confirmation</h2>
+          <p class="mb-4">{{ modalMessage }}</p>
+          <button
+            @click="closeModal"
+            class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition"
+          >
+            Fermer
+          </button>
+        </div>
       </div>
     </div>
-    <Contenu></Contenu>
+     
   </template>
   
   <script setup>
-  import Aside from '@/Pages/Aside.vue';
-import Nav from '@/Pages/Nav.vue';
+  import { ref } from 'vue';
   
-    const quickAccessItems = [
-    { title: 'Anniversaires', count: 8, iconClass: 'fas fa-birthday-cake text-red-500' },
-    { title: 'Amis', count: 12, iconClass: 'fas fa-users text-blue-500' },
-    { title: 'Vœux', count: 237, iconClass: 'fas fa-envelope text-green-500' },
-  ];
+  // Variables réactives
+  const currentCard = ref(1)
+  const cardText = ref(
+    "Joyeux anniversaire ! Que cette année t'apporte bonheur et succès. Que tous tes rêves deviennent réalité et que chaque jour soit rempli de joie et de rires. Profite de cette journée spéciale et de toutes les belles choses qu'elle t'apporte. Bon anniversaire !"
+  )
+  const isEditing = ref(false)
+  const showModal = ref(false)
+  const modalMessage = ref("")
   
-  const folders = [
-    { title: 'Anniversaires', count: 3, iconClass: 'fas fa-birthday-cake text-red-500' },
-    { title: 'Amis', count: 84, iconClass: 'fas fa-users text-red-500' },
-  ];
+  // Méthodes
+  function showCard(cardNumber) {
+    currentCard.value = cardNumber
+  }
   
+  function editText() {
+    isEditing.value = true
+  }
+  
+  function saveText() {
+    isEditing.value = false
+    modalMessage.value = "Texte enregistré avec succès!"
+    showModal.value = true
+  }
+  
+  function sendText() {
+    modalMessage.value = "Message envoyé avec succès!"
+    showModal.value = true
+  }
+  
+  function closeModal() {
+    showModal.value = false
+  }
   </script>
   
   <style scoped>
-  body {
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .animate-bounce-slow {
-    animation: bounce 2s infinite;
-  }
-  
-  @keyframes bounce {
-  
-    0%,
-    100% {
-      transform: translateY(-25%);
-      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    }
-  
-    50% {
-      transform: translateY(0);
-      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    }
+  .card {
+    max-width: 250px;
   }
   </style>
+  
