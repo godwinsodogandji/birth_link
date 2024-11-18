@@ -13,12 +13,12 @@
                     </a>
                     <ul class="ml-6 mt-2">
                         <li class="mb-2">
-                            <a class="text-gray-500 hover:text-red-500 transition duration-300" href="#">
+                            <a class="text-gray-500 hover:text-red-500 transition duration-300" src="" href="anniversaire-avenir">
                                 Prochains
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a class="text-gray-500 hover:text-red-500 transition duration-300" href="#">
+                            <a class="text-gray-500 hover:text-red-500 transition duration-300" src="" href="anniversaire-passe">
                                 Passés
                             </a>
                         </li>
