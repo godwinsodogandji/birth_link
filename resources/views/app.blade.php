@@ -30,11 +30,6 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <style>
-        html, body {
-            height: 100%;
-            overflow: hidden;
-            margin: 0;
-        }
     </style>
 
     <!-- Scripts -->
