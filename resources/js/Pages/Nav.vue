@@ -42,7 +42,7 @@
             <i class="fas fa-chevron-down ml-1"></i>
           </button>
           <div v-if="showProfileMenu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Profil</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/profile">Profil</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Paramètres</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">Déconnexion</a>
           </div>

@@ -7,12 +7,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AmisSuggererController;
 use App\Http\Controllers\AnniversaireAvenirController;
 use App\Http\Controllers\AnniversairePasseController;
-<<<<<<< HEAD
-=======
-use App\Http\Controllers\CardBitthdayController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashbordController;
->>>>>>> 43d1da98787a2fcffd841e643a02aa4d12d3738e
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
@@ -44,15 +38,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::put('/edit', [ProfileController::class, 'update']);
+    Route::put('/profile', [ProfileController::class, 'update']);
 });
-<<<<<<< HEAD
 
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
-=======
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
->>>>>>> 43d1da98787a2fcffd841e643a02aa4d12d3738e
 Route::get('/suggestion-des-amis', [AmisSuggererController::class, 'index'])->name('suggestion-des-amis');
 
 Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
@@ -62,19 +52,3 @@ Route::get('/anniversaire-passe', [AnniversairePasseController::class, 'index'])
 
 Route::get('/confirmation-des-amis', [AmisSuggererController::class, 'confirmation'])->name('confirmation-des-amis');
 Route::get('/friends', [FriendController::class, 'index'])->name('friends');
-<<<<<<< HEAD
-=======
-
-Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
-// Route::get('/dashboard', [DashbordController::class, 'index'])->name('dashbord');
-Route::get('/anniversaire-avenir', [AnniversaireAvenirController::class, 'index'])->name('anniversaire-avenir');
-Route::get('/anniversaire-passe', [AnniversairePasseController::class, 'index'])->name('anniversaire-passe');
-Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
-Route::get('/card', [CardBitthdayController::class, 'index'])->name('card');
-
-//message
-
-
-
-Route::post('/sendMessage', [ThemePersonController::class, 'sendMessage']);
->>>>>>> 43d1da98787a2fcffd841e643a02aa4d12d3738e
