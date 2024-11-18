@@ -1,4 +1,5 @@
 <template>
+  
   <div class="flex items-center justify-center min-h-screen p-6 bg-red-100">
     <!-- Sidebar pour les boutons -->
     <div class="space-y-6 mr-20">
@@ -9,12 +10,12 @@
       <button @click="showCard(5)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150 transition block">Carte de voeux n°5</button>
       <button @click="showCard(6)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150 transition block">Carte de voeux n°6</button>
       <button @click="openModal" class="bg-green-500 text-white py-2 px-4 rounded mt-6 mx-auto block hover:bg-green-600 transition">
-  Ouvrir le modal pour l'image
+ Cliquer pour ajouter une carte
 </button>
     </div>
   </div>
 
-    <!-- Modal d'upload d'image -->
+    <!-- Modal d'envoi  d'image dans la db-->
     <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10">
     <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
       <h3 class="text-center font-semibold text-xl mb-4">Upload Image</h3>
@@ -46,14 +47,10 @@
           <p class="text-black font-semibold text-xl">bonheur et succès.</p>
         </div>
 
-        <div v-if="cardId === 2" class="flex">
-          <img src="C:\Users\christiane.sossoukpe\Documents\birth_link\public\images\iconannif.png" alt="Icône anniversaire" class="w-25 h-20 mr-5 mb-10" />
-          <img src="C:\Users\christiane.sossoukpe\Documents\birth_link\public\images\iconannif.png" alt="Icône anniversaire" class="w-25 h-20 mr-5" />
-          <img src="C:\Users\christiane.sossoukpe\Documents\birth_link\public\images\iconannif.png" alt="Icône anniversaire" class="w-25 h-20 mr-5" />
-        </div>
-        <p v-if="cardId === 2" class="text-black font-bold text-lg">Joyeux anniversaire!</p>
+     
+        <!-- <p v-if="cardId === 2" class="text-black font-bold text-lg">Joyeux anniversaire!</p>
         <p v-if="cardId === 2" class="text-black font-semibold text-xl">Félicitations pour cette nouvelle année de vie.</p>
-        <p v-if="cardId === 2" class="text-black font-normal text-base">Que tous tes rêves deviennent réalité !</p>
+        <p v-if="cardId === 2" class="text-black font-normal text-base">Que tous tes rêves deviennent réalité !</p> -->
 
         <div v-if="cardId === 3" class="shadow-lg p-6 rounded-full mt-20 bg-white">
           <p class="text-black font-semibold text-xl">Que ton anniversaire</p>
@@ -98,12 +95,14 @@ const showModal = ref(false);
 const selectedFile = ref(null);
 const description = ref('');
 const cardImage = {
-  1: '/images/carte1.jpg',
-  2: '/images/cartee2.png',
-  3: '/images/carte3.png',
-  4: '/images/carte4.png',
-  5: '/images/carte5.png',
-  6: '/images/design.png'
+  1: '/images/carte1copie.jpg',
+  2: '/images/carte2copie.png',
+  3: '/images/carte3copie.png',
+  4: '/images/carte4copie.png',
+  5: '/images/carte5copie.png',
+  6: '/images/carte6copie.png',
+  7: '/images/carte7copie.png',
+  8: '/images/carte8copie.png'
 };
 
 function showCard(cardId) {
