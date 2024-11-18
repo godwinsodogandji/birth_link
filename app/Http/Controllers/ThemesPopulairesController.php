@@ -22,7 +22,9 @@ class ThemesPopulairesController extends Controller
         ]);
 
         // Sauvegarder l'image dans le dossier public/images
-        $imagePath = $request->file('image')->move(public_path('images'), $request->file('image')->getClientOriginalName());
+        $imagePath = $request->file('image')->move(
+            public_path('images'), $request->file('image')
+            ->getClientOriginalName());
 
         // Enregistrer les données dans la base de données
         $card = Card::create([
@@ -36,4 +38,26 @@ class ThemesPopulairesController extends Controller
             'card' => $card
         ]);
     }
+    public function getCards()
+{
+    // Récupère toutes les cartes de la base de données
+    $cards = Card::all(); 
+    
+    // Parcourt chaque carte et ajoute l'URL de l'image
+    foreach ($cards as $card) {
+        // Génère l'URL de l'image et ajoute cette information à la carte
+        $card->image_url = asset('images/' . $card->image_path);
+    }
+
+    // Utiliser Inertia pour retourner une réponse avec les cartes et un message de succès
+    return response()->json( [
+        'message' => 'Cartes récupérées avec succès',  // Message de succès
+        'cards' => $cards  // Cartes avec les URLs d'images
+    ]);
+}
+
+    
+
+
+
 }

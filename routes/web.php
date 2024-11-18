@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/udpate', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-
+ 
 
 
 // Route::get('/dashboard', [DashbordController::class, 'index'])->name('dashbord');
@@ -63,7 +63,7 @@ Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajo
 Route::get('/anniversaire-avenir', [AnniversaireAvenirController::class, 'index'])->name('anniversaire-avenir');
 Route::get('/anniversaire-passe', [AnniversairePasseController::class, 'index'])->name('anniversaire-passe');
 Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
-Route::get('/card', [CardBitthdayController::class, 'index'])->name('card');
+// Route::get('/card', [CardBitthdayController::class, 'index'])->name('card');
 
 
 
@@ -71,3 +71,4 @@ Route::get('/card', [CardBitthdayController::class, 'index'])->name('card');
 Route::get('/themes-populaires', [ThemesPopulairesController::class, 'index'])->name('themes-populaires');
 
 Route::post('/store/theme-poulaires', [ThemesPopulairesController::class, 'store'])->name('store-theme');
+Route::get('/themes-populaires', [ThemesPopulairesController::class, 'getCards'])->name('themes-populaires');
