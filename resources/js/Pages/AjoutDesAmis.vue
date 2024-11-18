@@ -38,8 +38,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
+                  </div>
+                  
                 <div class="mt-9 flex items-center">
                     <button @click="prevPage" :disabled="currentPage === 1" class="px-4 py-2 bg-red-600 text-white rounded-l">Previous</button>
                     <span class="px-4 py-2">Page {{ currentPage }} of {{ totalPages }}</span>
@@ -50,9 +50,9 @@
     </div>
 </template>
 <script setup>
-import Nav from '@/Pages/Nav.vue'
 import Aside from '@/Pages/Aside.vue';
-import { ref, computed } from 'vue';
+import Nav from '@/Pages/Nav.vue';
+import { computed, ref } from 'vue';
 
 // Exemple de données utilisateurs
 const users = ref([
