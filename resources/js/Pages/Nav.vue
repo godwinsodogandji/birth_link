@@ -1,5 +1,5 @@
 <template>
-    <her class="bg-white shadow-md p-4 flex justify-between items-center">
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
 
         <div class="flex items-center">
             <i class="fas fa-birthday-cake text-red-500 text-3xl mr-2"></i>
@@ -18,8 +18,11 @@
                         <p class="text-gray-700 font-semibold">Notifications</p>
                         <ul>
                             <li v-for="(notification, index) in notifications" :key="index" class="mt-2">
-                                <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="#">{{ notification
-                                    }}</a>
+                                <a 
+                                    href="/notification" 
+                                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    {{ notification }}
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -41,7 +44,7 @@
             </div>
         </nav>
 
-    </her>
+    </header>
 </template>
 
 <script setup>
@@ -53,9 +56,11 @@ const notifications = [
   'Rappel: Anniversaire de Jean demain',
   'Nouveau thème ajouté',
 ];
+
 const toggleNotifications = () => {
   showNotifications.value = !showNotifications.value;
 };
+
 const toggleProfileMenu = () => {
   showProfileMenu.value = !showProfileMenu.value;
 };

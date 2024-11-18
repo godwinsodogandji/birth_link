@@ -1,62 +1,49 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Souhaits d'Anniversaire</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @else
-    @endif
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartes avec Boutons</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .card {
+      max-width: 250px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
-<body class="font-sans antialiased">
+<body class="flex items-center justify-center min-h-screen p-6 bg-gray-100">
+  <!-- Sidebar for Buttons -->
+  <div class="space-y-6 mr-20">
+    <button onclick="showCard(1)" class="bg-red-500 text-white py-2 px-4 rounded w-full hover:bg-red-600 transition">Carte 1</button>
+  </div>
 
-    <div class="relative min-h-screen flex items-center justify-center bg-[url('/animations/flat-lay-composition-birthday-elements-with-copyspace.jpg')] bg-cover bg-center">
-
-        <div class="absolute inset-0 z-0 opacity-30"></div>
-
-        <div class="w-full max-w-lg p-6 bg-white dark:bg-gray-900 bg-opacity-80 rounded-xl shadow-xl space-y-6 z-10">
-            <header class="text-center">
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Bienvenue dans votre application de souhaits d'anniversaire!</h1>
-                <p class="text-gray-600 dark:text-gray-400">Connectez-vous ou inscrivez-vous pour commencer à célébrer!</p>
-            </header>
-
-            <div id="lottieAnimation" class="animation-container h-64 w-full flex justify-center items-center"></div>
-
-            <nav class="flex flex-col items-center space-y-4">
-                @if (Route::has('login'))
-                    @auth
-                        {{-- <a href="{{ url('/dashboard') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
-                            Dashboard
-                        </a> --}}
-                    @else
-                        <a href="{{ route('login') }}" class="w-full text-center rounded-md bg-[#FF2D15] text-white py-2 transition hover:bg-[#e63946] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="w-full text-center rounded-md bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-2 transition hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                @endif
-            </nav>
-        </div>
+  <!-- Container for Cards -->
+  <section class="grid grid-cols-1 gap-4 ml-8">
+    <div id="card-1" class="card hidden bg-gradient-to-r from-red-500 to-red-700 p-6 rounded-lg shadow-md text-center flex items-center justify-center flex-col bg-cover" style="min-height: 990px; min-width: 850px;">
+      <textarea id="card-text" class="bg-transparent text-white font-semibold text-xl text-center w-full h-full resize-none focus:outline-none" rows="10" readonly>
+Joyeux anniversaire ! Que cette année t'apporte bonheur et succès. Que tous tes rêves deviennent réalité et que chaque jour soit rempli de joie et de rires. Profite de cette journée spéciale et de toutes les belles choses qu'elle t'apporte. Bon anniversaire !
+      </textarea>
+      <button onclick="editText()" class="mt-4 bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition">Personnaliser le texte</button>
     </div>
+  </section>
 
-    <style scoped>
-        .animation-container {
-            width: 100%;
-            height: 300px;
-            margin: auto;
-        }
-    </style>
+  <script>
+    function showCard(cardNumber) {
+      // Cache all cards
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+
+      // Show the selected card
+      document.getElementById('card-' + cardNumber).classList.remove('hidden');
+    }
+
+    function editText() {
+      const textArea = document.getElementById('card-text');
+      textArea.removeAttribute('readonly');
+      textArea.focus();
+    }
+  </script>
 </body>
 </html>
