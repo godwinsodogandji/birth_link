@@ -38,13 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/udpate', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/edit', [ProfileController::class, 'update']);
 });
-
-Route::get('/debug-user', function () {
-    return response()->json(Auth::user()); // Affiche les données de l'utilisateur
-});
-
 
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');

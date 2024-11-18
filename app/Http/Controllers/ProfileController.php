@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // dd($user);
+
         return Inertia::render('Profile', [
             'user' => $user,
         ]);
@@ -22,10 +22,10 @@ class ProfileController extends Controller
 
         /** @var User $user */
 
-        $user = Auth::user(); // Récupérer l'utilisateur connecté
+        $user = Auth::user();
 
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Veuillez vous connecter.');
+            return redirect()->route('login')->withErrors(['error' => 'Veuillez vous connecter.']);
         }
 
         // Validation des données
@@ -35,20 +35,23 @@ class ProfileController extends Controller
             'date_of_birth' => 'nullable|date',
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'promo' => 'nullable|string|max:255',
+            'password' => 'nullable|string|min:8',
         ]);
 
-        // Vérifiez si une image a été téléchargée
+        // Gestion du fichier de profil
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public');
             $data['profile_picture'] = $path; // Stockez le chemin de l'image
         }
 
+
         // Mettre à jour les informations de l'utilisateur
-        $user->update($data);
+        try {
+            $user = User::where('id', $user->id)->update($data);
+            return response()->json(['message' => 'Profil mis à jour avec succès.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erreur lors de la mise à jour : ' . $e->getMessage()], 500);
+        }
 
-        return redirect()->route('profile')->with('success', 'Profil mis à jour avec succès.');
     }
-
-
 }
-
