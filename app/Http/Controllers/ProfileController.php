@@ -10,9 +10,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // Récupérer l'utilisateur connecté
         $user = Auth::user();
-        // Récupérer les informations de l'utilisateur
+        // dd($user);
         return Inertia::render('Profile', [
             'user' => $user,
         ]);

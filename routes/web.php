@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AmisSuggererController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -37,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/udpate', [ProfileController::class, 'update'])->name('profile.update');
 });
 
+Route::get('/debug-user', function () {
+    return response()->json(Auth::user()); // Affiche les données de l'utilisateur
+});
 
 
 
