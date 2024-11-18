@@ -25,5 +25,10 @@ class DatabaseSeeder extends Seeder
             'profile_picture' => 'profile_pictures/test_user.png',
             'promo' => 'Promo2024'
         ]);
+
+
+        $this->call([
+            MessagesTableSeeder::class,
+        ]);
     }
 }

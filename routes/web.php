@@ -32,3 +32,9 @@ Route::get('/anniversaire-avenir', [AnniversaireAvenirController::class, 'index'
 Route::get('/anniversaire-passe', [AnniversairePasseController::class, 'index'])->name('anniversaire-passe');
 Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
 Route::get('/card', [CardBitthdayController::class, 'index'])->name('card');
+
+//message
+
+
+
+Route::post('/sendMessage', [ThemePersonController::class, 'sendMessage']);
