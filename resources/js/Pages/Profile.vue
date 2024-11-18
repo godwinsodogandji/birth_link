@@ -138,9 +138,8 @@
 </template>
 
 <script setup>
-import { usePage } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 const { props } = usePage();
 const user = props.user || {};
@@ -165,14 +164,7 @@ const handleFileUpload = (event) => {
 };
 
 // Calculer l'URL de l'image de profil
-const profileImageUrl = computed(() => {
-    if (form.profile_picture) {
-        return URL.createObjectURL(form.profile_picture);
-    }
-    return form.profile_picture
-        ? `/storage/${form.profile_picture}`
-        : "https://via.placeholder.com/100";
-});
+
 
 // Mettre à jour le profil
 const updateProfile = async () => {
