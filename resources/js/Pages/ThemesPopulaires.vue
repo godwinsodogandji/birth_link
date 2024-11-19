@@ -1,9 +1,8 @@
 <template>
   <Nav />
-  <Aside /> 
- 
+  <Aside />
   <div class="flex items-center justify-center min-h-screen p-6 bg-red-100">
-        <!-- Modal d'envoi d'image dans la DB -->
+    <!-- Modal d'envoi d'image dans la DB -->
     <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10">
       <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
         <h3 class="text-center font-semibold text-xl mb-4">Upload Image</h3>
@@ -13,23 +12,27 @@
         <button @click="closeModal" class="bg-gray-500 text-white py-2 px-4 rounded mt-4 w-full">Fermer</button>
       </div>
     </div>
-
     <!-- Conteneur pour les cartes -->
-    <section id="sessioncard" class="grid grid-cols-4 gap-8  mt-6">
-      
+    <section id="sessioncard" class="grid grid-cols-4 gap-8 mt-6">
       <!-- Boucle sur les cartes -->
       <div v-for="card in paginatedCards" :key="card.id" class="card-container">
-        <!-- Affiche l'image -->
-        <img :src="`http://127.0.0.1:8000/${card.image_path}`"
-        alt="Image de la carte" class="rounded shadow-md w-full h-60 object-cover" />
-        <!-- Affiche la description -->
+        <!-- Affiche l'image et ouvre la modale au clic -->
+        <img
+          :src="`http://127.0.0.1:8000/${card.image_path}`"
+          alt="Image de la carte"
+          class="rounded shadow-md w-full h-60 object-cover cursor-pointer"
+          @click="openModal(card)"
+        />
         <p class="text-black text-center mt-4">{{ card.description }}</p>
       </div>
-      <div class="flex justify-center space-x-4 mt-6">
+    </section>
+
+    <!-- Pagination -->
+    <div class="flex justify-center items-center space-x-4 mt-6">
       <button
         @click="changePage('prev')"
         :disabled="currentPage === 1"
-        class="bg-blue-500 text-white flex items-center justify-center py-2 px-4 rounded disabled:opacity-50"
+        class="bg-[#a35d71] text-white py-2 px-3 rounded disabled:opacity-50"
       >
         Précédent
       </button>
@@ -37,32 +40,61 @@
       <button
         @click="changePage('next')"
         :disabled="currentPage === totalPages"
-        class="bg-blue-500 text-white py-2 px-4 rounded disabled:opacity-50"
+        class="bg-[#a35d71] text-white py-2 px-3 rounded disabled:opacity-50"
       >
         Suivant
       </button>
+      
     </div>
-    </section>
 
-    <!-- Pagination -->
-   
+    <!-- Modale dynamique -->
+    <div
+      v-if="activeCard"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10"
+    >
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative">
+        <!-- Bouton de fermeture -->
+        <button
+          @click="closeModal"
+          class="absolute top-4 h-10 left-4 text-red-500 text-xl"
+        >
+          &times;
+        </button>
+
+        <!-- Contenu de la modale -->
+        <div class="card-container">
+          <img
+            :src="`http://127.0.0.1:8000/${activeCard.image_path}`"
+            alt="Image"
+            class="rounded w-full h-60 object-cover mb-4 mr-4"
+          />
+          <p class="text-center text-lg font-semibold">{{ activeCard.description }}</p>
+        </div>
+
+        <!-- Bouton d'envoi -->
+       
+          <button
+            @click="sendCard(activeCard)"
+            class="bg-[#a35d71] flex justify-center items-center text-white py-2 px-4 rounded hover:bg-[#a35d71]"
+          >
+            Envoyer
+          </button>
+            </div>
+    </div>
   </div>
 </template>
+
 
 <script setup>
 import Nav from '@/Pages/Nav.vue';
 import Aside from '@/Pages/Aside.vue';
-
 import axios from 'axios';
 import { onMounted, ref, computed } from 'vue';
 
-const activeCard = ref(null);
-const showModal = ref(false);
-const selectedFile = ref(null);
-const description = ref('');
 const cards = ref([]);
 const currentPage = ref(1);
 const cardsPerPage = 8;
+const activeCard = ref(null); // Pour stocker la carte active (ouverte dans la modale)
 
 // Fonction pour récupérer les cartes
 const fetchCards = async () => {
@@ -71,10 +103,10 @@ const fetchCards = async () => {
     if (response.data && response.data.cards) {
       cards.value = response.data.cards;
     } else {
-      console.error("Structure de réponse inattendue :", response.data);
+      console.error('Structure de réponse inattendue :', response.data);
     }
   } catch (error) {
-    console.error("Erreur lors de la récupération des cartes :", error);
+    console.error('Erreur lors de la récupération des cartes :', error);
   }
 };
 
@@ -82,7 +114,17 @@ onMounted(() => {
   fetchCards();
 });
 
-// Fonction pour changer de page
+// Pagination
+const paginatedCards = computed(() => {
+  const startIndex = (currentPage.value - 1) * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
+  return cards.value.slice(startIndex, endIndex);
+});
+
+const totalPages = computed(() => {
+  return Math.ceil(cards.value.length / cardsPerPage);
+});
+
 const changePage = (direction) => {
   if (direction === 'next' && currentPage.value < totalPages.value) {
     currentPage.value++;
@@ -91,64 +133,46 @@ const changePage = (direction) => {
   }
 };
 
-// Calcul des cartes paginées
-const paginatedCards = computed(() => {
-  const startIndex = (currentPage.value - 1) * cardsPerPage;
-  const endIndex = startIndex + cardsPerPage;
-  return cards.value.slice(startIndex, endIndex);
-});
-
-// Calcul du nombre total de pages
-const totalPages = computed(() => {
-  return Math.ceil(cards.value.length / cardsPerPage);
-});
-
-// Modal functions
-const openModal = () => {
-  showModal.value = true;
+// Gestion de la modale
+const openModal = (card) => {
+  activeCard.value = card; // Affiche les détails de la carte cliquée
 };
 
 const closeModal = () => {
-  showModal.value = false;
-  selectedFile.value = null;
-  description.value = '';
+  activeCard.value = null; // Ferme la modale
 };
 
-const handleFileChange = (event) => {
-  selectedFile.value = event.target.files[0];
-};
-
-const uploadImage = async () => {
-  if (!selectedFile.value || !description.value) {
-    alert("Veuillez remplir tous les champs.");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append('image', selectedFile.value);
-  formData.append('description', description.value);
-
+// Fonction pour envoyer les données
+const sendCard = async (card) => {
   try {
-    const response = await axios.post('/theme-poulaires', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-    closeModal(); // Fermer le modal
+    const response = await axios.post(route('send-card'), { card });
+    console.log('Réponse après envoi:', response.data);
+    // alert('Carte envoyée avec succès !');
+    closeModal(); // Ferme la modale après l'envoi
   } catch (error) {
-    console.error("Erreur lors de l'upload de l'image:", error);
+    console.error('Erreur lors de l\'envoi de la carte :', error);
+    // alert('Une erreur est survenue. Veuillez réessayer.');
   }
 };
 </script>
 
+
+
 <style scoped>
 .card-container {
-  max-width: 300px;
+  max-width: 450px;
 }
 .card-container img {
-  width: 2000px;
+  width: 1000px;
   height: 300px;
   object-fit: cover;
 }
-#sessioncard{
+#sessioncard {
   margin-left: 250px;
 }
+button:focus {
+  outline: none;
+}
+
+
 </style>

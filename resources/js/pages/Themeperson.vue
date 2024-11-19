@@ -77,7 +77,7 @@
             v-show="isFormModalVisible"
             class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
         >
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center w-[800px]">
                 <h2 class="text-xl font-bold mb-4">Personnaliser la Carte</h2>
                 <form @submit.prevent="saveCustomization">
                     <div class="mb-4">
