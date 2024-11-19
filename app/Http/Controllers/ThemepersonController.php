@@ -20,7 +20,7 @@ class ThemepersonController extends Controller
         // Validation des données
         $request->validate([
             'title' => 'required|string|max:255',
-            'text' => 'required|string|max:1000',
+            'text' => 'required|string|max:800',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation pour l'image
         ]);
 
