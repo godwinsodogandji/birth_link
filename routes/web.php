@@ -31,8 +31,11 @@ Route::middleware(['guest'])->group(function () {
     })->name('register');
 
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
     Route::post('/register', [RegisteredUserController::class, 'store']);
 });
+Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
+
 
 // Routes accessibles uniquement pour les utilisateurs authentifiés
 Route::middleware(['auth', 'verified'])->group(function () {
