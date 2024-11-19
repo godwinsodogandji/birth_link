@@ -18,8 +18,9 @@ return new class extends Migration
             $table->enum('status', ['pending', 'accepted', 'declined', 'blocked'])->default('pending'); // Statut de l'amitié
             $table->timestamps(); 
 
-            // Assurez-vous que la combinaison user_id et friend_id est unique
+             // Assurer que la relation entre un utilisateur et son ami est unique, peu importe l'ordre des IDs
             $table->unique(['user_id', 'friend_id']);
+            $table->unique(['friend_id', 'user_id']); // pour éviter des doublons inversés
         });
     }
 
