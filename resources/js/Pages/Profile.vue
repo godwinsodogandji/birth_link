@@ -37,7 +37,7 @@
                 </div>
             </div>
             <form
-                @submit.prevent="form.put('/profile')"
+                @submit.prevent="form.put('/edit')"
 
             >
                 <div class="mb-4">
@@ -185,7 +185,7 @@ const updateProfile = async () => {
     });
 
     try {
-        form.put("/profile", formData, {
+        form.put("/edit", formData, {
             onSuccess: () => {
                 successMessage.value = "Profil mis à jour avec succès.";
             },

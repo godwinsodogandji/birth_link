@@ -10,6 +10,7 @@ use App\Http\Controllers\AnniversairePasseController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ThemepersonController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +40,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // dd('les amis sont ici');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::put('/edit', [ProfileController::class, 'update']);
 });
+
+Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
 
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
