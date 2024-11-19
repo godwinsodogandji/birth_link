@@ -111,7 +111,8 @@ git checkout -b christiana
     <button onclick="showCard(3)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150  transition block">Carte de voeux n°3</button>
     <button onclick="showCard(4)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150  transition block">Carte de voeux n°4</button>
     <button onclick="showCard(5)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150 transition block">Carte de voeux n°5</button>
-    <button onclick="showCard(6)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150  transition block">Carte de voeux n°6</button>
+    <button onclick="showCard(6)" style="background-color: rgb(220,20,60);" class="text-white py-2 px-4 rounded w-150
+      transition block">Carte de voeux n°6</button>
   </div>
 </body>
 
