@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
-use Inertia\Inertia;
-use App\Models\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-
+use Inertia\Inertia;
 
 class ThemepersonController extends Controller
 {
@@ -30,15 +26,13 @@ class ThemepersonController extends Controller
             $imagePath = $request->file('image')->store('images', 'public');
         }
 
-        // Créer un message dans la base de données
-        $message = Message::create([
-            'title' => $request->input('title'),
-            'text' => $request->input('text'),
-            'image' => $imagePath, // Enregistrer le chemin de l'image si elle existe
-        ]);
+        // // Créer un message dans la base de données
+        // $message = Message::create([
+        //     'title' => $request->input('title'),
+        //     'text' => $request->input('text'),
+        //     'image' => $imagePath, // Enregistrer le chemin de l'image si elle existe
+        // ]);
 
-        // Renvoi de la vue avec un message de confirmation
-        return Inertia::render('Messages/Confirmation', [
-            'message' => 'Message envoyé avec succès!',
-        ]);
-    }}
+
+}
+}

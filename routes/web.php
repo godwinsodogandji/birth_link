@@ -8,20 +8,19 @@ use App\Http\Controllers\AmisSuggererController;
 use App\Http\Controllers\AnniversaireAvenirController;
 use App\Http\Controllers\AnniversairePasseController;
 use App\Http\Controllers\CardBitthdayController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemepersonController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return view('welcome');
-
 });
+
 // Routes de connexion et d'inscription protégées par le middleware 'guest'
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', function () {
@@ -36,7 +35,22 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store']);
 });
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
+
+
+// Routes accessibles uniquement pour les utilisateurs authentifiés
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
+    // dd('les amis sont ici');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/edit', [ProfileController::class, 'update']);
+});
+
+Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
+
+
+Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
 Route::get('/suggestion-des-amis', [AmisSuggererController::class, 'index'])->name('suggestion-des-amis');
 
 Route::get('/notification', [NotificationController::class, 'index'])->name('notification');

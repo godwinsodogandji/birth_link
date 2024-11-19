@@ -25,10 +25,5 @@ class DatabaseSeeder extends Seeder
             'profile_picture' => 'profile_pictures/test_user.png', // Chemin d'image fictif
             'promo' => 'Promo2024'
         ]);
-
-
-        $this->call([
-            MessagesTableSeeder::class,
-        ]);
     }
 }

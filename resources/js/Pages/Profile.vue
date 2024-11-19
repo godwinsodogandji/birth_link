@@ -4,7 +4,7 @@
         class="bg-gray-100 flex items-center justify-center h-screen"
     >
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-            <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
+            <h2 class="text-2xl font-semibold mb-6">profile Profile</h2>
 
             <!-- Message de succès -->
             <div
@@ -138,9 +138,8 @@
 </template>
 
 <script setup>
-import { usePage } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
 
 const { props } = usePage();
 const user = props.user || {};
@@ -165,14 +164,14 @@ const handleFileUpload = (event) => {
 };
 
 // Calculer l'URL de l'image de profil
-const profileImageUrl = computed(() => {
-    if (form.profile_picture) {
-        return URL.createObjectURL(form.profile_picture);
-    }
-    return form.profile_picture
-        ? `/storage/${form.profile_picture}`
-        : "https://via.placeholder.com/100";
-});
+// const profileImageUrl = computed(() => {
+//     if (form.profile_picture) {
+//         return URL.createObjectURL(form.profile_picture);
+//     }
+//     return form.profile_picture
+//         ? `/storage/${form.profile_picture}`
+//         : "https://via.placeholder.com/100";
+// });
 
 // Mettre à jour le profil
 const updateProfile = async () => {

@@ -11,22 +11,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('friend_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // Pour le titre du message
-            $table->text('text');    // Pour le texte du message
-            $table->string('color')->nullable();
-            $table->string('photo')->nullable(); // Pour la photo (optionnelle)
+            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('friend_requests');
     }
 };
