@@ -2,90 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Friend;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class FriendController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('FriendListe');
-    }
+        if ($request->ajax()) {
+            // Récupérer la page demandée dans la requête AJAX
+            $page = $request->input('page', 1); // Par défaut, la page 1 si non spécifié
 
-    public function sendFriendRequest(Request $request, $friendId)
-    {
-        $user = $request->user();
-        $friend = User::findOrFail($friendId);
+            // Charger les amis paginés pour la page donnée
+            $friends = Friend::orderBy('name')->paginate(6, ['*'], 'page', $page);
 
-        // Vérifier si la demande d'amitié existe déjà
-        if ($user->friends()->wherePivot('friend_id', $friend->id)->exists()) {
-            return response()->json(['message' => 'Vous êtes déjà amis ou la demande est en attente.'], 400);
+            // Retourner les amis au format JSON (réponse AJAX)
+            return response()->json($friends);
         }
 
-        // Envoyer la demande d'amitié
-        $user->sendFriendRequest($friend);
-        return response()->json(['message' => 'Demande d\'amitié envoyée.']);
-    }
+        // Vue initiale pour la page 1
+        $friends = Friend::orderBy('name')->paginate(6);
 
-    public function acceptFriendRequest(Request $request, $friendId)
-    {
-        $user = $request->user();
-        $friend = User::findOrFail($friendId);
-
-        // Accepter la demande d'amitié
-        $user->acceptFriendRequest($friend);
-        return response()->json(['message' => 'Demande d\'amitié acceptée.']);
-    }
-
-    public function rejectFriendRequest(Request $request, $friendId)
-    {
-        $user = $request->user();
-        $friend = User::findOrFail($friendId);
-
-        // Rejeter la demande d'amitié
-        $user->rejectFriendRequest($friend);
-        return response()->json(['message' => 'Demande d\'amitié rejetée.']);
-    }
-
-    public function blockUser(Request $request, $friendId)
-    {
-        $user = $request->user();
-        $friend = User::findOrFail($friendId);
-
-        // Bloquer l'utilisateur
-        $user->blockUser($friend);
-        return response()->json(['message' => 'Utilisateur bloqué.']);
-    }
-
-    public function removeFriend(Request $request, $friendId)
-    {
-        $user = $request->user();
-        $friend = User::findOrFail($friendId);
-
-        // Retirer l'ami
-        $user->removeFriend($friend);
-        return response()->json(['message' => 'Ami retiré.']);
-    }
-
-    public function show(Request $request)
-    {
-        $user = $request->user();
-        $friends = $user->friends; // Liste des amis acceptés
-        return response()->json($friends);
-    }
-
-    public function pendingFriendRequests(Request $request)
-    {
-        $user = $request->user();
-        $pendingRequests = $user->pendingFriends;
-        return response()->json($pendingRequests);
-    }
-
-    public function sentFriendRequests(Request $request)
-    {
-        $user = $request->user();
-        $sentRequests = $user->sentFriendRequests;
-        return response()->json($sentRequests);
+        return Inertia::render('FriendListe', [
+            'friends' => $friends
+        ]);
     }
 }

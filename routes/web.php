@@ -11,13 +11,22 @@ use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemepersonController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Friend;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/friends', function () {
+    // Récupérez les amis depuis la base de données
+    $friends = Friend::all(); // Vous pouvez appliquer des filtres ou des recherches selon vos besoins
+
+    // Retournez les données avec Inertia
+    return Inertia::render('Friends', [
+        'friends' => $friends,  // Passez les données au composant Vue
+    ]);
 });
 
 // Routes de connexion et d'inscription protégées par le middleware 'guest'
