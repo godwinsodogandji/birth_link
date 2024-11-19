@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -37,7 +39,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
@@ -49,4 +51,21 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    use HasFactory;
+
+    // Méthode pour récupérer les amis de l'utilisateur
+    public function friends(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friend_requests', 'sender_id', 'receiver_id')
+                    ->wherePivot('status', 'accepted')
+                    ->orWherePivot('status', 'accepted')
+                    ->withTimestamps();
+    }
+    public function inverseFriends(): BelongsToMany
+{
+    return $this->belongsToMany(User::class, 'friend_requests', 'receiver_id', 'sender_id')
+                ->wherePivot('status', 'accepted')
+                ->withTimestamps();
+}
 }

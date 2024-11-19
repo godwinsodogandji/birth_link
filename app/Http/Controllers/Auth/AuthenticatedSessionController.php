@@ -39,4 +39,13 @@ class AuthenticatedSessionController extends Controller
             'username' => 'Les identifiants fournis sont incorrects.',
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Inertia::location(route('login')); // Redirigez vers la page de connexion
+    }
 }

@@ -10,14 +10,25 @@ use App\Http\Controllers\AnniversairePasseController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ThemepersonController;
+use App\Models\Friend;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return view('welcome');
-
 });
+
+Route::get('/friends', function () {
+    // Récupérez les amis depuis la base de données
+    $friends = Friend::all(); // Vous pouvez appliquer des filtres ou des recherches selon vos besoins
+
+    // Retournez les données avec Inertia
+    return Inertia::render('Friends', [
+        'friends' => $friends,  // Passez les données au composant Vue
+    ]);
+});
+
 // Routes de connexion et d'inscription protégées par le middleware 'guest'
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', function () {
@@ -32,19 +43,19 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store']);
 });
+Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
+
 
 // Routes accessibles uniquement pour les utilisateurs authentifiés
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
+    // dd('les amis sont ici');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/udpate', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/edit', [ProfileController::class, 'update']);
 });
 
-Route::get('/debug-user', function () {
-    return response()->json(Auth::user()); // Affiche les données de l'utilisateur
-});
-
+Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
 
 
 Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
