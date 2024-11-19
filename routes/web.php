@@ -3,10 +3,10 @@
 use App\Http\Controllers\AjoutDesAmisController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AmisSuggererController;
 use App\Http\Controllers\AnniversaireAvenirController;
 use App\Http\Controllers\AnniversairePasseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
