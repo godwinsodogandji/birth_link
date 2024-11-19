@@ -46,6 +46,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Inertia::location(route('login')); // Redirigez vers la page de connexion
+        return Inertia::location(route('login')); 
     }
 }
+
+

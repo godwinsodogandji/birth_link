@@ -17,7 +17,7 @@ class RegisteredUserController extends Controller
     {
         // Validation des données
         $validated = $request->validate([
-            'username' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
         ]);
 

@@ -21,7 +21,6 @@ class ProfileController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
-
         // Validation des données
         $validatedData = $request->validate([
             'username' => 'required|string|max:255',
@@ -42,7 +41,8 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        return response()->json(['message' => 'Profile updated successfully.']);
+        // Rediriger vers le tableau de bord après la mise à jour
+        return Inertia::location(route('dashboard')); // Assurez-vous que 'dashboard' est le nom de votre route
     }
 
 }
