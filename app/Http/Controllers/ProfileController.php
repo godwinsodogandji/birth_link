@@ -11,7 +11,6 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-
         return Inertia::render('Profile', [
             'user' => $user,
         ]);
@@ -21,7 +20,7 @@ class ProfileController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-       
+
 
         // Validation des données
         $validatedData = $request->validate([

@@ -10,14 +10,15 @@ use App\Http\Controllers\AnniversairePasseController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return view('welcome');
-
 });
+
 // Routes de connexion et d'inscription protégées par le middleware 'guest'
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', function () {
@@ -29,13 +30,13 @@ Route::middleware(['guest'])->group(function () {
     })->name('register');
 
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-
     Route::post('/register', [RegisteredUserController::class, 'store']);
 });
 
 // Routes accessibles uniquement pour les utilisateurs authentifiés
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/ajoutdesamis', [AjoutDesAmisController::class, 'index'])->name('ajoutdesamis');
+    // dd('les amis sont ici');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'update']);

@@ -30,6 +30,7 @@
 
                 <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4  ml-40 mb-20 gap-10 max-w mx-auto notification-page"
                     @scroll="handleScroll" ref="notificationContainer">
+
                     <div v-for="(user, index) in users" :key="index"
                         class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <img class="object-cover w-full rounded-t-lg h-screen md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
@@ -72,6 +73,7 @@
 
 
                     </div>
+                    
                 </div>
             </div>
         </div>
