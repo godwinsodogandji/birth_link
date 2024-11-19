@@ -8,7 +8,7 @@
         <h3 class="text-center font-semibold text-xl mb-4">Upload Image</h3>
         <input type="file" @change="handleFileChange" class="w-full mb-4" />
         <textarea v-model="description" placeholder="Entrez une description..." class="w-full mb-4 p-2 border rounded"></textarea>
-        <button @click="uploadImage" class="bg-blue-500 text-white py-2 px-4 rounded w-full">Envoyer l'image</button>
+        <button @click="uploadImage" class="bg-[#a35d71] text-white py-2 px-4 rounded w-full">Envoyer l'image</button>
         <button @click="closeUploadModal" class="bg-gray-500 text-white py-2 px-4 rounded mt-4 w-full">Fermer</button>
       </div>
     </div>
@@ -29,7 +29,7 @@
         <p class="text-black text-center mt-4">{{ card.description }}</p>
       </div>
       <!-- Pagination -->
-    <div class="flex justify-center items-center space-x-4 mt-6">
+    <div class="flex justify-center items-center space-x-4 mt-6 mb-1">
       <button @click="changePage('prev')" :disabled="currentPage === 1" class="bg-[#a35d71] text-white py-2 px-3 rounded disabled:opacity-50">
         Précédent
       </button>
