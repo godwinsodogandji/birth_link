@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AmisSuggererController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Friend;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,6 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 
 });
+
+Route::get('/friends', function () {
+    // Récupérez les amis depuis la base de données
+    $friends = Friend::all(); // Vous pouvez appliquer des filtres ou des recherches selon vos besoins
+
+    // Retournez les données avec Inertia
+    return Inertia::render('Friends', [
+        'friends' => $friends,  // Passez les données au composant Vue
+    ]);
+});
+
 // Routes de connexion et d'inscription protégées par le middleware 'guest'
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', function () {
