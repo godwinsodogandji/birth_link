@@ -123,12 +123,12 @@
   </div>
 </template>
 
-  
+
   <script setup>
   import Nav from '@/Pages/Nav.vue'
   import Aside from '@/Pages/Aside.vue';
   import { ref, computed, reactive, defineProps, onMounted, onBeforeUnmount } from 'vue';
-  
+
   // Définition des props pour recevoir les utilisateurs
   const props = defineProps({
     users: {
@@ -136,7 +136,7 @@
       required: true,
     }
   })
-  
+
   // Méthode pour gérer l'ouverture et la fermeture du dropdown
   const toggleDropdown = (index) => {
     // Ferme tous les autres dropdowns
@@ -148,7 +148,7 @@
     // Basculer l'état du dropdown de l'utilisateur sélectionné
     props.users[index].isDropdownOpen = !props.users[index].isDropdownOpen;
   };
-  
+
   // Méthode pour fermer le dropdown lorsqu'on clique ailleurs
   const closeDropdown = (event) => {
     // Si le clic est en dehors du dropdown et du bouton, on ferme les dropdowns ouverts
@@ -160,12 +160,12 @@
       });
     }
   };
-  
+
   // Ajout de l'écouteur d'événements lorsque le composant est monté
   onMounted(() => {
     document.addEventListener('click', closeDropdown);
   });
-  
+
   // Suppression de l'écouteur d'événements lorsque le composant est démonté
   onBeforeUnmount(() => {
     document.removeEventListener('click', closeDropdown);
@@ -178,19 +178,19 @@ const addFriend = (userId) => {
 
   // Exemple : simuler l'ajout en modifiant un état ou faire une requête API
   const user = props.users.find((user) => user.id === userId);
-  
+
   if (user) {
     // Ajouter un ami dans l'état local (simulé ici)
     user.isFriend = true;
     // On pourrait envoyer une requête HTTP pour enregistrer cette relation d'amitié dans la base de données ici.
-    
+
     alert(`Ami ajouté avec succès!`);
   }
 };
 
   </script>
-  
+
   <style scoped>
   /* Ajoutez ici vos styles spécifiques si nécessaire */
   </style>
-  
+

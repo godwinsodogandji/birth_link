@@ -12,12 +12,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemepersonController;
 use App\Models\Friend;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Route;
 
 Route::get('/friends', function () {
     // Récupérez les amis depuis la base de données

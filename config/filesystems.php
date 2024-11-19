@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     'disks' => [
 
         'local' => [
-            'driver' => 'local',
+            'driver' => 'public',
             'root' => storage_path('app/private'),
             'serve' => true,
             'throw' => false,
