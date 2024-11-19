@@ -68,7 +68,7 @@ Route::get('/theme', [ThemepersonController::class, 'index'])->name('theme');
 
 
 
-Route::get('/themes-populaires', [ThemesPopulairesController::class, 'index'])->name('themes-populaires');
+Route::get('/themespopulaires', [ThemesPopulairesController::class, 'index'])->name('themespopulaires');
 
 Route::post('/store/theme-poulaires', [ThemesPopulairesController::class, 'store'])->name('store-theme');
 Route::get('/themes-populaires', [ThemesPopulairesController::class, 'getCards'])->name('themes-populaires');

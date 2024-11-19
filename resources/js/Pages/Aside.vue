@@ -65,7 +65,7 @@
                     <ul class="ml-6 mt-2">
                         <li class="mb-2">
                             <a class="text-gray-500 hover:text-red-500 
-                            transition duration-300" href="/themes-populaires">
+                            transition duration-300" href="/themespopulaires">
                                 Thèmes Populaires
                             </a>
                         </li>
