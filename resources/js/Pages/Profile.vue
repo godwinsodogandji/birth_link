@@ -1,10 +1,10 @@
 <template>
     <div
         v-if="user"
-        class="bg-gray-100 flex items-center justify-center h-screen"
+        class="bg-red-100 flex items-center justify-center h-screen"
     >
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-            <h2 class="text-2xl font-semibold mb-6">profile Profile</h2>
+            <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
 
             <!-- Message de succès -->
             <div
@@ -36,10 +36,7 @@
                     </button>
                 </div>
             </div>
-            <form
-                @submit.prevent="form.put('/edit')"
-
-            >
+            <form @submit.prevent="form.put('/edit')">
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700"
                         >Username</label
